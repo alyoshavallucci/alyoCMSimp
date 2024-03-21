@@ -1,33 +1,30 @@
-
 <div class="alyo-posizione-relativo">
 
     <!-- CNT GRIGLIA -->
     <div *ngIf="elemento.tipo == 'CNT'" [ngClass]="[
 
-    elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
-    elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
-    elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
-    elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+        elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+        elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+        elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+        elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
 
-    selezionato ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
-    elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
-    
-    elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
-    elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
-    elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
-    elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+        selezionato ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+        elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+        
+        elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+        elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+        elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+        elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
 
-    ]"
-    [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
-    (mouseover)="hover=true" (mouseleave)="hover=false"
-    >
+    ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+        (mouseover)="hover=true" (mouseleave)="hover=false">
         <div class="alyo-altezza-minima-100px alyo-larghezza-100 row" style="margin: 0px;">
             <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
             elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
             elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
             elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
             ]">
-                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe"  class="alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'"></alyocontenitorelabel>           
+                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'"></alyocontenitorelabel>
             </div>
         </div>
     </div>
@@ -52,11 +49,11 @@
         selezionato ? elemento.classe[19] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[19]):elemento.classe[17] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[17]),
         elemento.classe[18] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[18])+'-hover',
     
-        ]" 
-        [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
-        (mouseover)="hover=true" (mouseleave)="hover=false"
-        
-        class="alyo-altezza-minima-10px alyo-testo-centro alyo-testo-grigio40 alyo-bordo-0px alyo-larghezza-100" ><fa-icon *ngIf="valori" [ngClass]="elemento.classe[20] == '' ? '':alyo+alyowool.classe.testograndezza.valore+'-'+elemento.classe[20]" [icon]="alyowool.fa[elemento.componente.valore].valore"></fa-icon><fa-icon *ngIf="!valori" [icon]="alyowool.fa.icone.valore"></fa-icon></div>
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+            (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-altezza-minima-10px alyo-testo-centro alyo-testo-grigio40 alyo-bordo-0px alyo-larghezza-100">
+            <fa-icon *ngIf="valori" [ngClass]="elemento.classe[20] == '' ? '':alyo+alyowool.classe.testograndezza.valore+'-'+elemento.classe[20]" [icon]="alyowool.fa[elemento.componente.valore].valore"></fa-icon>
+            <fa-icon *ngIf="!valori" [icon]="alyowool.fa.icone.valore"></fa-icon>
+        </div>
     </div>
 
     <!-- TXT - TESTO -->
@@ -84,9 +81,8 @@
         elemento.classe[22] == '' ? '':alyo+'testo-'+elemento.classe[22],
         elemento.classe[23] == '' ? '':alyo+elemento.classe[23],
         
-        ]" 
-        [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
-        (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-overflow-nascosto alyo-larghezza-100"  >{{valori ? elemento.componente.valore:'Testo'}}</div>
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+            (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-overflow-nascosto alyo-larghezza-100">{{valori ? elemento.componente.valore:'Testo'}}</div>
     </div>
 
     <!-- TXA - TESTO AREA -->
@@ -114,9 +110,8 @@
         elemento.classe[22] == '' ? '':alyo+'testo-'+elemento.classe[22],
         elemento.classe[23] == '' ? '':alyo+elemento.classe[23],
         
-        ]"  
-        [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
-        (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-overflow-nascosto alyo-larghezza-100 alyo-altezza-minima-100px"  >{{valori ? elemento.componente.valore:'Testo Area'}}</div>
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+            (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-overflow-nascosto alyo-larghezza-100 alyo-altezza-minima-100px">{{valori ? elemento.componente.valore:'Testo Area'}}</div>
     </div>
 
     <!-- LNK - LINK -->
@@ -135,21 +130,20 @@
             elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
             elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
 
-        ]" 
-        [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
         (mouseover)="hover=true" (mouseleave)="hover=false">
-     
+
         <div class="alyo-altezza-minima-100px alyo-larghezza-100 row" style="margin: 0px;">
             <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
                 elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
                 elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
                 elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
             ]">
-                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe"  class="alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'" ></alyocontenitorelabel>           
+                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'"></alyocontenitorelabel>
             </div>
         </div>
 
-        <div [ngClass]="['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100']" class="alyo-overflow-nascosto" >Link</div>
+        <div [ngClass]="['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100']" class="alyo-overflow-nascosto">Link</div>
     </div>
 
     <!-- BTN - BOTTONE -->
@@ -168,29 +162,28 @@
             elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
             elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
 
-        ]"                 
-        [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':selezionato ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
         (mouseover)="hover=true" (mouseleave)="hover=false">
-    
+
         <div class="alyo-altezza-minima-100px alyo-larghezza-100 row" style="margin: 0px;">
             <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
                 elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
                 elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
                 elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
             ]">
-                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe"  class="alyo-altezza-100px alyo-larghezza-100 alyo-testo-grigio40" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'"></alyocontenitorelabel>           
+                <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-altezza-100px alyo-larghezza-100 alyo-testo-grigio40" style="margin: 0px;" [alyowool]="alyowool" [valori]="valori" [selezionato]="selezionato != undefined ? selezionato:'undefined'"></alyocontenitorelabel>
             </div>
         </div>
 
-        <div *ngIf="!valori" [ngClass]="['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100']" class="alyo-overflow-nascosto" >Bottone</div>
+        <div *ngIf="!valori" [ngClass]="['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100']" class="alyo-overflow-nascosto">Bottone</div>
     </div>
 
     <!-- IMG - IMMAGINE -->
     <div *ngIf="elemento.tipo == 'IMG'">
 
         <div class="alyo-overflow-nascosto alyo-larghezza-100 alyo-altezza-minima-100px">
-            
-            <img class="alyo-larghezza-100 alyo-trasparente-bianco-0" [src]="valori ? './../'+elemento.componente.valore:'../../assets/immagini/generali/image.png elemento.componente'" [ngClass]="[             
+
+            <img class="alyo-larghezza-100 alyo-trasparente-bianco-0" [src]="'https://www.alyowool.com/'+elemento.componente.valore" [ngClass]="[             
                 elemento.classe[3] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[3],
                 elemento.classe[4] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[4],
                 elemento.classe[5] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[5],

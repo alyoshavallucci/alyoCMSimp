@@ -9,7 +9,7 @@
    VID = VIDEO
    BTN = BOTTONE
    CMT = COMPONENTE
-
+   ACS = Contenut
 -->
 
 <div class="alyo-posizione-relativo alyo-dropbox">
@@ -322,5 +322,138 @@
         <alyocontenutiscorrevoli *ngIf="elemento.componente.tipo == 'ACS'" [elemento]="elemento" [alyowool]="alyowool" (alyocontenutiscorrevoli)="alyocontenutiscorrevoli = $event"></alyocontenutiscorrevoli>
 
     </div>
+
+    <!------------------------------------------ PANELLI ---------------------------------------------------->
+
+    <div *ngIf="pannello_aggiungi" style="top: 50px; left: 10px; z-index: 100;" class="alyo-posizione-assoluto alyo-piano-4 alyo-larghezza-500px alyo-altezza-500px alyo-overflow-scrollo alyo-piano-5 alyo-bordo-rotondo-20px alyo-bianco">
+
+        <div class="row">
+            <div class="col-4" style="padding: 0px;"></div>
+            <div class="col-4 alyo-testo-centro alyo-larghezza-100 alyo-altezza-50px" style="overflow: auto; white-space: nowrap; padding: 5px;">
+                <button *ngFor="let elemento of lista_tipi_aggiungi; index as i2;" (click)="bottoneselezionato('aggiungi',elemento)" class="alyo-bordo-0px alyo-bianco alyo-trasparente-bianco-0" style="width: 30px; height: 30px; display: inline-block; padding: 5px; margin: 0px;">
+                        <div [ngClass]="elemento.selezione ? 'alyo-blu':'alyo-trasparente-bianco-0'" class="alyo-bordo-rotondo-50 alyo-larghezza-100 alyo-altezza-100 alyo-bordo-solido-blu-1px alyo-bordo-0px "></div>
+                    </button>
+            </div>
+        </div>
+
+        <div *ngIf="lista_tipi_aggiungi[0].selezione" class="alyo-padding-5px row" style="margin: 0px;">
+            <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
+                    elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
+                    elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
+                    elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
+                    ]" class="alyo-padding-5px alyo-grigio20-hover alyo-bordo-rotondo-10px" style="margin: 0px; padding: 5px;">
+                <button (click)="inserimento({funzione: 'esistente',elementopadre: elemento,elemento: elemento2})" class="alyo-bordo-0px alyo-bianco alyo-larghezza-100">
+                        <alyocontenitorelabel [elemento]="elemento2" [lista_classe]="lista_classe"  class="alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [alyocontenitori]="this" [alyocolore]="alyocolore" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);" ></alyocontenitorelabel> 
+                    </button>
+            </div>
+        </div>
+
+        <div *ngIf="lista_tipi_aggiungi[1].selezione">
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'CNT'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 0px;">
+                <div class="row" style="margin: 0px; padding: 5px;">
+                    <div *ngFor="let item of [0,1,2,3,4,5,6,7]" class="col-3" style="margin: 0px; padding: 5px;">
+                        <div class="alyo-grigio10 alyo-altezza-30px alyo-larghezza-100 alyo-bordo-rotondo-10px"></div>
+                    </div>
+                </div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'ICO'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 10px;">         
+                    <div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-10px">Icona</div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'TXT'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 10px;">         
+                    <div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-10px">Testo</div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'TXA'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 10px;">         
+                    <div class="alyo-grigio10 alyo-larghezza-100 alyo-altezza-100px alyo-bordo-rotondo-10px alyo-padding-10px">Testo Area</div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'LNK'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 10px;">         
+                <div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-5px"><div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-5px">Link</div></div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'BTN'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco" style="margin: 0px; padding: 10px;">         
+                <div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-5px"><div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-5px">Bottone</div></div>
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'IMG'})" class=" alyo-bordo-0px  alyo-bianco" style="margin: 0px; padding: 10px;">         
+                <img class="alyo-larghezza-100" [src]="'../../assets/immagini/generali/image.png'">
+            </button>
+
+            <button (click)="inserimento({funzione: 'nuovo',elemento: elemento,tipo: 'CMP'})" class="alyo-larghezza-100 alyo-bordo-0px alyo-bianco alyo-padding-10px" style="margin: 0px; padding: 0px;">
+                <div class="alyo-grigio10 alyo-larghezza-100 alyo-bordo-rotondo-10px alyo-padding-5px">Alyo Componente</div>
+            </button>
+
+        </div>
+    </div>
+
+    <div *ngIf="pannello_emoticon" style="bottom: -205px; left: 0px; z-index: 4;" class="alyo-posizione-assoluto alyo-piano-4 alyo-larghezza-300px alyo-altezza-200px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-10px">
+        <button *ngFor="let item of alyowool.fa.fa" (click)="modifica({tabella: 'alyoicone',attributo: 'valore',valore: item,id: elemento.id_componente})" class="col-2 alyo-larghezza-50px alyo-altezza-50px alyo-bianco alyo-bordo-0px alyo-testo-grigio40" style="margin: 0px; padding: 0px;">
+            <fa-icon class="alyo-testo-20px " [icon]="alyowool.fa[item].valore"></fa-icon>
+          </button>
+    </div>
+
+    <div *ngIf="pannello_tipilink" style="top: 50px; right: 60px; z-index: 4;" class="alyo-posizione-assoluto alyo-piano-4 alyo-padding-5px alyo-larghezza-150px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-20px">
+        <div class="row alyo-padding-5px ">
+            <button *ngFor="let item of lista_tipi_link" (click)="modifica({tabella: 'alyolink',attributo: 'tipo',valore: item.id})" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                style="margin: 0px; padding: 0px;">
+              {{item.nome}}
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="pannello_tipiimmagini" style="top: 50px; right: 0px; z-index: 4;" class="row alyo-posizione-assoluto alyo-piano-4 alyo-padding-5px alyo-larghezza-180px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-20px">
+        <div class="row alyo-padding-5px ">
+            <button *ngFor="let elemento of lista_tipi_immagini" (click)="modifica({tabella: 'alyoimmagini',attributo: 'tipo',valore: elemento.id});" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                style="margin: 0px; padding: 0px;">
+                    {{elemento.nome}}
+                </button>
+        </div>
+    </div>
+
+    <div *ngIf="panello_tipibottoni" style="top: 50px; right: 0px; z-index: 4;" class="row alyo-posizione-assoluto alyo-piano-4 alyo-padding-5px alyo-larghezza-200px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-20px">
+        <div class="row alyo-padding-5px ">
+            <div *ngFor="let elemento2 of lista_tipi_bottoni">
+                <button (click)="modifica({tabella: 'alyobottoni',attributo: 'tipo',valore: elemento2.id})" [ngClass]="elemento2.id == elemento.componente.tipo ? 'alyo-bordo-solido-blu-1px':''" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                    style="margin: 0px; padding: 0px;">
+                        {{ elemento2.nome }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="panello_tipicontenitori" style="top: 50px; right: 0px; z-index: 4;" class="row alyo-posizione-assoluto alyo-piano-4 alyo-padding-5px alyo-larghezza-400px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-20px">
+        <div class="row alyo-padding-5px ">
+            <div *ngFor="let elemento2 of lista_tipi_contenitori">
+
+                <div *ngIf="elemento2.id == 0">
+                    <button (click)="modifica({tabella: 'alyocontenitori',attributo: 'id_componente',valore: 0})" [ngClass]="elemento2.id == elemento.id_componente ? 'alyo-bordo-solido-blu-1px':''" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                        style="margin: 0px; padding: 0px;">
+                            {{ elemento2.nome }}
+                        </button>
+                </div>
+
+                <div *ngIf="elemento2.id == 1">
+                    <button *ngFor="let elemento3 of alyowool.lista_bottoni" (click)="modifica({tabella: 'alyocontenitori',attributo: 'id_componente',valore: elemento3})" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                        style="margin: 0px; padding: 0px;">
+                            <alyocontenitorelabel [elemento]="elemento3" [lista_classe]="lista_classe"  class="alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [alyocontenitori]="this" [alyocolore]="alyocolore" [valori]="true" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);" ></alyocontenitorelabel> 
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="panello_tipicomponenti" style="top: 50px; right: 0px; z-index: 4;" class="row alyo-posizione-assoluto alyo-piano-4 alyo-padding-5px alyo-larghezza-400px alyo-overflow-scrollo alyo-bianco alyo-bordo-rotondo-20px">
+        <div *ngFor="let elemento2 of alyowool.lista_alyocomponenti" class="alyo-padding-5px">
+            <button (click)="modifica({tabella: 'alyocomponenti',attributo: 'tipo',valore: elemento2.tipo})" [ngClass]="elemento2.tipo == elemento.componente.tipo ? 'alyo-bordo-solido-blu-1px':''" class="alyo-grigio10-hover alyo-padding-10px alyo-larghezza-100 alyo-bianco alyo-bordo-0px alyo-testo-grigio40 alyo-bordo-rotondo-10px"
+                style="margin: 0px; padding: 0px;">
+                {{ elemento2.nome }}
+            </button>
+        </div>
+    </div>
+
 
 </div>

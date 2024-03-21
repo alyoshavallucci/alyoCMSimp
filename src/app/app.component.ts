@@ -26,9 +26,9 @@ export class AppComponent {
   lista_componenti: any = []
 
   pc:               any = [];
-  pannello        = false;
-  pannello_eventi = false;
-  selezionato     = true;
+  pannello = false;
+  pannello_eventi   = false;
+  selezionato       = true;
 
   velocita: any = "10000";
 

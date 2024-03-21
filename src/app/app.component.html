@@ -78,7 +78,7 @@
 
 <div *ngIf="pannello || pannello_eventi" (click)="pannello = false; pannello_eventi = false;" style="top: 0px; left: 0px" class="alyo-posizione-fisso alyo-trasparente-0 alyo-piano-4 alyo-larghezza-100 alyo-altezza-100"></div>
 
-<div *ngIf="pannello_eventi" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-20 alyo-posizione-fisso alyo-altezza-massima-500px alyo-bordo-rotondo-30px alyo-ombra-20">
+<div *ngIf="pannello_eventi" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-50 alyo-posizione-fisso alyo-altezza-massima-500px alyo-bordo-rotondo-30px alyo-ombra-20">
     <div [ngClass]="['alyo-'+alyocolore.fisso.biancogrigio60]" class="alyo-trasparente-50 alyo-padding-5px row alyo-margine-0px">
         <div *ngFor="let elemento2 of ['Colori','Visualizzazioni']; index as i1;" class="alyo-padding-5px col-6">
 
