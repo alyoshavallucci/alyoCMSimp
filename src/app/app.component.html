@@ -1,0 +1,97 @@
+<alyocolori [velocita]="10000" (alyocolore)="alyocolore = $event;"></alyocolori>
+<alyoiconesito [alyowool]="alyowool" (alyoiconesito)="alyoiconesito = $event;"></alyoiconesito>
+<alyofonts [testo]="'alyosha vallucci'" (alyofonts)="alyofonts = $event"></alyofonts>
+<alyonomesito [alyowool]="alyowool" (alyonomesito)="alyonomesito = $event"></alyonomesito>
+
+
+<alyocontenitore [elemento]="elemento" class="alyo-dropbox alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [alyocolore]="alyocolore" [componente]="componente" (eventobottoni)="elemento.piano=elemento.piano+$event;" (alyocontenitore)="alyocontenitore2 = $event;"></alyocontenitore>
+
+<!-- <alyolingue (alyolingua)="alyolingua = $event"></alyolingue>  -->
+
+<div *ngIf="pannello" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-75 alyo-posizione-fisso alyo-altezza-500px alyo-bordo-rotondo-30px alyo-ombra-20">
+    <div [ngClass]="['alyo-'+alyocolore.fisso.biancogrigio60]" class="alyo-trasparente-50 alyo-padding-5px row alyo-margine-0px" style="width: 3000px;">
+        <div *ngFor="let elemento2 of componente[elemento_selezionato.tipo].classi; index as i1;" class="alyo-padding-5px col-1">
+
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.nome }}</h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.normale != undefined ? elemento2.elemento.normale.nome:'' }} </h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.hover != undefined ? elemento2.elemento.hover.nome:'' }} </h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.selezionato != undefined ? elemento2.elemento.selezionato.nome:'' }}</h4>
+
+            <div class=" alyo-padding-5px alyo-bordo-rotondo-20px" [ngClass]="'alyo-'+alyocolore.fisso.grigio10grigio70">
+                <div *ngFor="let elemento3 of elemento2.valori; index as i2;" class="alyo-margine-0px alyo-padding-5px">
+                    <button *ngFor="let elemento5 of elemento3; index as i3;" (click)="modifica({funzione: 'classe',tabella: 'alyocontenitori',attributo: 'classe',valore: elemento_selezionato.classe,id: elemento_selezionato.id,elemento: elemento5.valore,posizione: i1})"
+                        [ngClass]="[elemento5.valore == elemento_selezionato.classe[i1] ? 'alyo-bordo-solido-blu-1px':'','alyo-testo-'+alyocolore.fisso.nerobianco,'alyo-'+alyocolore.fisso.grigio10grigio70,'alyo-'+alyocolore.fisso.grigio20grigio80+'-hover']"
+                        class="alyo-larghezza-100 alyo-padding-5px alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                        {{ elemento5.nome != '' ? elemento5.nome:'Nessun Elemento' }}
+                    </button>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="pannello || pannello_eventi" (click)="pannello = false; pannello_eventi = false;" style="top: 0px; left: 0px" class="alyo-posizione-fisso alyo-trasparente-0 alyo-piano-4 alyo-larghezza-100 alyo-altezza-100"></div>
+
+<div *ngIf="pannello_eventi" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-20 alyo-posizione-fisso alyo-altezza-massima-500px alyo-bordo-rotondo-30px alyo-ombra-20">
+    <div [ngClass]="['alyo-'+alyocolore.fisso.biancogrigio60]" class="alyo-trasparente-50 alyo-padding-5px row alyo-margine-0px">
+        <div *ngFor="let elemento2 of ['Colori','Visualizzazioni']; index as i1;" class="alyo-padding-5px col-6">
+
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2 }}</h4>
+
+            <div class="alyo-padding-10px alyo-bordo-rotondo-20px" [ngClass]="'alyo-'+alyocolore.fisso.grigio10grigio70">
+                <button *ngFor="let elemento3 of lista_bottoni; index as i3;" (click)="modifica({funzione: 'eventi',tabella: 'alyocontenitori',attributo: 'eventi',valore: elemento3,elemento: elemento_selezionato,posizione: i1})" [ngClass]="[elemento3.id == elemento_selezionato.eventi[i1].id ? 'alyo-bordo-solido-blu-1px':'' ,'alyo-testo-'+alyocolore.fisso.nerobianco,'alyo-'+alyocolore.fisso.grigio10grigio70,'alyo-'+alyocolore.fisso.grigio20grigio80+'-hover']"
+                    class="alyo-larghezza-100 alyo-padding-5px alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                    <div *ngIf="elemento3 == ''">Nessun Elememto</div>
+                    <div *ngIf="elemento3 != ''"><alyocontenitorelabel [elemento]="elemento3"  class="alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [alyocontenitori]="this" [alyocolore]="alyocolore" [valori]="true" ></alyocontenitorelabel> </div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="pannello" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-75 alyo-posizione-fisso alyo-altezza-500px alyo-bordo-rotondo-30px alyo-ombra-20">
+    <div [ngClass]="['alyo-'+alyocolore.fisso.biancogrigio60]" class="alyo-trasparente-50 alyo-padding-5px row alyo-margine-0px" style="width: 3000px;">
+        <div *ngFor="let elemento2 of componente[elemento_selezionato.tipo].classi; index as i1;" class="alyo-padding-5px col-1">
+
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.nome }}</h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.normale != undefined ? elemento2.elemento.normale.nome:'' }} </h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.hover != undefined ? elemento2.elemento.hover.nome:'' }} </h4>
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2.elemento.selezionato != undefined ? elemento2.elemento.selezionato.nome:'' }}</h4>
+
+            <div class=" alyo-padding-5px alyo-bordo-rotondo-20px" [ngClass]="'alyo-'+alyocolore.fisso.grigio10grigio70">
+                <div *ngFor="let elemento3 of elemento2.valori; index as i2;" class="alyo-margine-0px alyo-padding-5px">
+                    <button *ngFor="let elemento5 of elemento3; index as i3;" (click)="modifica({funzione: 'classe',tabella: 'alyocontenitori',attributo: 'classe',valore: elemento_selezionato.classe,id: elemento_selezionato.id,elemento: elemento5.valore,posizione: i1})"
+                        [ngClass]="[elemento5.valore == elemento_selezionato.classe[i1] ? 'alyo-bordo-solido-blu-1px':'','alyo-testo-'+alyocolore.fisso.nerobianco,'alyo-'+alyocolore.fisso.grigio10grigio70,'alyo-'+alyocolore.fisso.grigio20grigio80+'-hover']"
+                        class="alyo-larghezza-100 alyo-padding-5px alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                        {{ elemento5.nome != '' ? elemento5.nome:'Nessun Elemento' }}
+                    </button>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="pannello || pannello_eventi" (click)="pannello = false; pannello_eventi = false;" style="top: 0px; left: 0px" class="alyo-posizione-fisso alyo-trasparente-0 alyo-piano-4 alyo-larghezza-100 alyo-altezza-100"></div>
+
+<div *ngIf="pannello_eventi" style="bottom: 10px; z-index: 25; overflow-x: auto; opacity: 1;" class="alyo-sfocato-30px alyo-centro-orrizontale alyo-testo-centro alyo-larghezza-20 alyo-posizione-fisso alyo-altezza-massima-500px alyo-bordo-rotondo-30px alyo-ombra-20">
+    <div [ngClass]="['alyo-'+alyocolore.fisso.biancogrigio60]" class="alyo-trasparente-50 alyo-padding-5px row alyo-margine-0px">
+        <div *ngFor="let elemento2 of ['Colori','Visualizzazioni']; index as i1;" class="alyo-padding-5px col-6">
+
+            <h4 [ngClass]="['alyo-testo-'+alyocolore.fisso.nerobianco]">{{ elemento2 }}</h4>
+
+            <div class="alyo-padding-10px alyo-bordo-rotondo-20px" [ngClass]="'alyo-'+alyocolore.fisso.grigio10grigio70">
+                <button *ngFor="let elemento3 of lista_bottoni; index as i3;" (click)="modifica({funzione: 'eventi',tabella: 'alyocontenitori',attributo: 'eventi',valore: elemento3,elemento: elemento_selezionato,posizione: i1})" [ngClass]="[elemento3.id == elemento_selezionato.eventi[i1].id ? 'alyo-bordo-solido-blu-1px':'' ,'alyo-testo-'+alyocolore.fisso.nerobianco,'alyo-'+alyocolore.fisso.grigio10grigio70,'alyo-'+alyocolore.fisso.grigio20grigio80+'-hover']"
+                    class="alyo-larghezza-100 alyo-padding-5px alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                    <div *ngIf="elemento3 == ''">Nessun Elememto</div>
+                    <div *ngIf="elemento3 != ''"><alyocontenitorelabel [elemento]="elemento3"  class="alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" [alyocontenitori]="this" [alyocolore]="alyocolore" [valori]="true" ></alyocontenitorelabel> </div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="row alyo-margine-0px alyo-padding-5px">
+    <div *ngFor="let elemento2 of scuro_chiara;  let i = index" class="col-6 alyo-margine-0px alyo-padding-5px">
+        <button (click)="aggiornamento(elemento2)" class="alyo-bordo-rotondo-10px alyo-overflow-nascosto alyo-bordo-0px alyo-larghezza-100 alyo-padding-0px" [ngClass]="elemento2.valore ? 'alyo-bordo-solido-blu-1px':''" style="margin: 0px; padding: 5px;">
+            <img class="alyo-larghezza-100 alyo-bordo-rotondo-10px" [src]="percorso.false+elemento2.src">
+        </button>
+    </div>
+</div>

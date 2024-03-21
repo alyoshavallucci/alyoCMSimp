@@ -1,0 +1,38 @@
+<!-- <div id="alyo-scrittescorrevoli" class="classe.contenitore" class="alyo-bordo-1px">
+</div> -->
+<!-- <h1 id="testo1" class="alyo-h1" style="position: absolute; top: 50%; left: -50%; transform: translate(-50%, -50%); white-space: nowrap; ">CONTENUTO 1</h1>
+     <h1 id="testo2" class="alyo-h1" style="position: absolute; top: 50%; left: 50%;  transform: translate(-50%, -50%); white-space: nowrap; ">CONTENUTO 2</h1>
+     <h1 id="testo3" class="alyo-h1" style="position: absolute; top: 50%; left: 150%; transform: translate(-50%, -50%); white-space: nowrap; ">CONTENUTO 3</h1>
+     <h1 id="testo4" class="alyo-h1" style="position: absolute; top: 50%; left: 250%; transform: translate(-50%, -50%); white-space: nowrap; ">CONTENUTO 4</h1> -->
+
+<!-- CNT - GRIGLIA -->
+<div class="alyo-bordo-1px alyo-posizione-relativo alyo-overflow-scrollo example-list row" [ngClass]="[
+         
+        elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+        elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+        elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+        elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+        elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+        elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+        
+        elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+        elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+        elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+        elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+    (mouseover)="hover=true" (mouseleave)="hover=false" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+
+
+    <ng-container *ngFor="let elemento2 of elemento.lista_componenti;  let i = index">
+        <div *ngIf="elemento2.eventi[1] == 0 ? true:elemento2.eventi[1].selezionato" style="position: absolute; top: 50px; transform: translate(-50%, -50%);" [ngClass]="[
+
+                                elemento2.classe[2] == '' ? '':'alyo-'+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
+                            ]" [ngStyle]="{'z-index': elemento2.piano,'left': posizione(i)}" class="alyo-altezza-100px">
+
+            <alyocontenitore [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-dropbox alyo-altezza-100 alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);"></alyocontenitore>
+        </div>
+    </ng-container>
+
+</div>

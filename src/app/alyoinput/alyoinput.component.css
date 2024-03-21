@@ -1,0 +1,36 @@
+
+.alyo-contenitore {
+  position: relative;
+}
+
+.alyo-cancella {
+  position: absolute;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  top: 50%;
+  transform: translate(0, -50%);
+
+}
+
+.alyo-visibile{
+  position: absolute;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  top: 50%;
+  transform: translate(0, -50%);
+
+}
+
+.alyo-contenitore-validazione{
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  padding: 10px;
+}
+
+.alyo-contenitore-alyofonts {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  padding: 10px;
+}

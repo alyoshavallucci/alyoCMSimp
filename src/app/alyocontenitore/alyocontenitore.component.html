@@ -1,0 +1,326 @@
+<!-------------------TIPI----------------------
+
+   CNT = CONTENITORE
+   ICO = ICONA
+   TXT = TESTO
+   TXA = TESTAREA
+   LNK = LINK
+   IMG = IMMAGINE
+   VID = VIDEO
+   BTN = BOTTONE
+   CMT = COMPONENTE
+   ACS = CONTENUTI SCORREVOLI
+-->
+
+<div class="alyo-posizione-relativo alyo-dropbox">
+
+    <!-- CNT - GRIGLIA -->
+    <div *ngIf="elemento.tipo == 'CNT'" [ngClass]="[
+
+            elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+            elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+            elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+            elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+            
+            elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+            elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+
+            ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+        (mouseover)="hover=true" (mouseleave)="hover=false">
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="pannello_aggiungi = !pannello_aggiungi;  aggiornapiano(pannello_aggiungi); " class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; left:  0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.piu.valore"></fa-icon></button>
+            <button (click)="verticale=!verticale;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; left:  30px;">                                 <fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.lista.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello = !alyowool.pannello;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore">                  </fa-icon></button>
+            <!-- <button (click)="cancella = !cancella" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; right: 0px;">                 <fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.cestino.valore">              </fa-icon></button> -->
+        </div>
+
+        <div class="alyo-altezza-minima-100px alyo-larghezza-100 example-list row" style="margin: 0px;" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let elemento2 of elemento.lista_componenti">
+                <div *ngIf="elemento2.eventi[1] == 0 ? true:elemento2.eventi[1].selezionato" [ngClass]="[
+                                    elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
+                                    elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
+                                    elemento2.classe[2] == '' ? '':'alyo-'+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
+                                ]" [ngStyle]="{'z-index': elemento2.piano, width: verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                    <alyocontenitore [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-dropbox alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);"></alyocontenitore>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+
+    <!-- ICO - ICONA -->
+    <div *ngIf="elemento.tipo == 'ICO'">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello;  ;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+        </div>
+
+        <button (click)="pannello_emoticon = !pannello_emoticon; aggiornapiano(pannello_emoticon);" [ngClass]="[
+                
+                    elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+                    elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+                    elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+                    elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+        
+                    elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],      
+                    elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+        
+                    elemento.classe[3]  == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+                    elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+                    elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+                    elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+        
+                    elemento.eventi[0].selezionato == true ? elemento.classe[19] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[19]):elemento.classe[17] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[17]),
+                    elemento.classe[18] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[18])+'-hover',
+                ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+            (mouseover)="hover=true" (mouseleave)="hover=false" class="alyo-altezza-minima-10px alyo-testo-centro alyo-bordo-0px alyo-larghezza-100"><fa-icon [ngClass]="elemento.classe[20] == '' ? '':alyo+alyowool.classe.testograndezza.valore+'-'+elemento.classe[20]" [icon]="alyowool.fa[elemento.componente.valore].valore"></fa-icon></button>
+
+    </div>
+
+    <!-- TXT - TESTO -->
+    <div *ngIf="elemento.tipo == 'TXT'" class="alyo-altezza-minima-50px alyo-larghezza-100">
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello;alyowool.s('alyowool.componente[elemento.tipo].classi: ',alyowool.componente[elemento.tipo].classi); ;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+        </div>
+        <div [ngClass]="[
+
+            elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+            elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+            elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+            elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+
+            ]" (mouseover)="hover=true" (mouseleave)="hover=false">
+            <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="['alyotesti',elemento.id_componente,'valore']" [alyoclasse]="{contenitore: '',input: [
+            elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+            elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+
+            elemento.eventi[0].selezionato == true ? elemento.classe[19] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[19]):elemento.classe[17] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[17]),
+            elemento.classe[18] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[18])+'-hover',
+
+            elemento.classe[20] == '' ? '':alyo+'testo-'+elemento.classe[20],
+            elemento.classe[21] == '' ? '':alyo+'testo-'+elemento.classe[21],
+            elemento.classe[22] == '' ? '':alyo+'testo-'+elemento.classe[22],
+            elemento.classe[23] == '' ? '':alyo+elemento.classe[23],
+            
+            ],bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}" [alyostile]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+                [placeholder]="'Testo'" [alyowool]="alyowool"></alyoinput>
+
+        </div>
+
+    </div>
+
+    <!-- TXA - TESTO -->
+    <div *ngIf="elemento.tipo == 'TXA'" class="alyo-altezza-minima-50px alyo-larghezza-100">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello;alyowool.s('alyowool.componente[elemento.tipo].classi: ',alyowool.componente[elemento.tipo].classi); ;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+        </div>
+        <div [ngClass]="[
+
+                elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+                elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+                elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+                elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+                elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+                elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+             
+            ]" (mouseover)="hover=true" (mouseleave)="hover=false">
+            <alyoinput [testo]="elemento.componente" [tipo]="'textarea'" [modifica]="['alyotestiarea',elemento.id_componente,'valore']" [alyoclasse]="{contenitore: '',input: [
+                
+                elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+                elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+                elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+                elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+
+                elemento.eventi[0].selezionato == true ? elemento.classe[19] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[19]):elemento.classe[17] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[17]),
+                elemento.classe[18] == '' ? '':'alyo-testo-'+individuacolore(elemento.classe[18])+'-hover',
+
+                elemento.classe[20] == '' ? '':alyo+'testo-'+elemento.classe[20],
+                elemento.classe[21] == '' ? '':alyo+'testo-'+elemento.classe[21],
+                elemento.classe[22] == '' ? '':alyo+'testo-'+elemento.classe[22],
+                elemento.classe[23] == '' ? '':alyo+elemento.classe[23]
+           
+            ],bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}" [alyostile]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+                [placeholder]="'Testo'" [alyowool]="alyowool"></alyoinput>
+        </div>
+    </div>
+
+    <!-- LNK - LINK -->
+    <div *ngIf="elemento.tipo == 'LNK'" [ngClass]="[
+
+            elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5]  == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+            elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+            elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+            elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+
+            elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+            elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+            elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+            elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
+        (mouseover)="hover=true" (mouseleave)="hover=false">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="pannello_aggiungi =!pannello_aggiungi; aggiornapiano(pannello_aggiungi);" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; left:  0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.piu.valore"></fa-icon></button>
+            <button (click)="verticale=!verticale;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; left:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.lista.valore"></fa-icon></button>
+            <button (click)="pannello_tipilink = !pannello_tipilink; aggiornapiano(pannello_tipilink);" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-130px  alyo-bordo-0px"
+                style="top: 10px; right: 60px;">{{ lista_tipi_link[elemento.componente.tipo].nome }}</button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello; ;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 10px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+            <!-- <button (click)="cancella = !cancella" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; right: 0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.cestino.valore"></fa-icon></button> -->
+        </div>
+
+        <div class="alyo-altezza-minima-100px alyo-larghezza-100 example-list row" style="margin: 0px;" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
+                        elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
+                        elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
+                        elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
+                    ]" [ngStyle]="{'z-index': elemento2.piano, width: verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                <alyocontenitore [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-dropbox alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);"></alyocontenitore>
+            </div>
+        </div>
+
+        <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="['alyolink',elemento.id_componente,'valore']" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100 alyo-bianco-trasparente-30 alyo-sfocato-30px','alyo-'+alyowool.alyocolore.fisso.grigio10grigio60], bottone_cancella: 'alyo-trasparente-0 alyo-testo-grigio20'}"
+            [placeholder]="'Testo'" [alyowool]="alyowool"></alyoinput>
+
+
+    </div>
+
+    <!-- IMG - IMMAGINE -->
+    <div *ngIf="elemento.tipo == 'IMG'">
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="pannello_tipiimmagini = !pannello_tipiimmagini; aggiornapiano(pannello_tipiimmagini);" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-130px  alyo-bordo-0px"
+                style="top: 10px; right: 60px;">{{ lista_tipi_immagini[elemento.componente.tipo].nome }}</button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+        </div>
+
+        <div *ngIf="elemento.componente.tipo == 0">
+            <alyofile [file]="{id: elemento.id_componente,src: elemento.componente,tipo: 'immagine'}" [sql]="{tabella: 'alyoimmagini',attributo: 'valore'}" [classe]="{dropbox: 'alyo-overflow-nascosto alyo-larghezza-100 ',immaginevideo: [
+                
+                    elemento.classe[3] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[3],
+                    elemento.classe[4] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[4],
+                    elemento.classe[5] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[5],
+                    elemento.classe[6] == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[6],
+                    
+                ],contenitore: [elemento.classe[7] == '' ? '':alyo+'testo-'+elemento.classe[7]]}" [estensioni]="['jpg','jpeg','png','gif']" [alyowool]="alyowool"></alyofile>
+        </div>
+
+        <div *ngIf="elemento.componente.tipo == 1" [ngClass]="elemento.classe[7] == '' ? '':alyo+'testo-'+elemento.classe[7]">
+            <img [src]="elemento.componente.valore" [ngClass]="[
+                
+                    elemento.classe[3] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[3],
+                    elemento.classe[4] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[4],
+                    elemento.classe[5] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[5],
+                    elemento.classe[6] == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[6],
+
+                ]" class="alyo-altezza-minima-100px">
+            <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="['alyoimmagini',elemento.id_componente,'valore']" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100 alyo-bianco-trasparente-30'], bottone_cancella: 'alyo-trasparente-0 alyo-testo-grigio30'}"
+                [placeholder]="'Url'" [alyowool]="alyowool"></alyoinput>
+        </div>
+    </div>
+
+    <!-- BTN - BOTTONE -->
+    <div *ngIf="elemento.tipo == 'BTN'" (click)="aggiornabottoni(elemento)" [ngClass]="[
+
+        elemento.classe[3] == '' ? '':alyo+alyowool.classe.padding.valore+'-'+elemento.classe[3],
+        elemento.classe[4] == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+        elemento.classe[5] == '' ? '':alyo+alyowool.classe.altezza.valore+'-'+elemento.classe[5],
+        elemento.classe[6] == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+        elemento.classe[7] == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+        elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+        elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+
+        ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')'}"
+        (mouseover)="hover=true" (mouseleave)="hover=false">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="pannello_aggiungi =!pannello_aggiungi; aggiornapiano(pannello_aggiungi);" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; left:  0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.piu.valore"></fa-icon></button>
+            <button (click)="verticale=!verticale;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; left:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.lista.valore"></fa-icon></button>
+            <button (click)="panello_tipibottoni=!panello_tipibottoni; " class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px" style="top: 10px; right:  60px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.cerchiopunto.valore"></fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento; alyowool.pannello = !alyowool.pannello;  ;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore"></fa-icon></button>
+            <!-- <button (click)="cancella = !cancella" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; right: 0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.cestino.valore"></fa-icon></button> -->
+        </div>
+
+        <div class="alyo-altezza-minima-100px alyo-larghezza-100 example-list row" style="margin: 0px;" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let elemento2 of elemento.lista_componenti" [ngClass]="[
+                        elemento2.classe[0] == '' ? '':alyowool.classe.col.valore+'-'+elemento2.classe[0],
+                        elemento2.classe[1] == '' ? '':alyowool.classe.colsm.valore+'-'+elemento2.classe[1],
+                        elemento2.classe[2] == '' ? '':alyo+alyowool.classe.margine.valore+'-'+elemento2.classe[2],
+                    ]" [ngStyle]="{'z-index': elemento2.piano, width: verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                <alyocontenitore [elemento]="elemento2" [lista_classe]="lista_classe" class="alyo-testo-rosso-figlio alyo-dropbox alyo-altezza-100px alyo-larghezza-100" style="margin: 0px;" [alyowool]="alyowool" (eventopiano)="elemento.piano=elemento.piano+$event; eventopiano.emit($event);"></alyocontenitore>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CMP - COMPONENTE -->
+    <div *ngIf="elemento.tipo == 'CMP'" [ngClass]="[
+
+    elemento.classe[4]  == '' ? '':alyo+alyowool.classe.larghezza.valore+'-'+elemento.classe[4],
+    elemento.classe[5]  == '' ? '':alyo+(alyowool.classe.altezza.valore+50)+'-'+elemento.classe[5],
+    elemento.classe[6]  == '' ? '':alyo+alyowool.classe.bordorotondo.valore+'-'+elemento.classe[6],
+    elemento.classe[7]  == '' ? '':alyo+alyowool.classe.ombra.valore+'-'+elemento.classe[7],
+
+    elemento.eventi[0].selezionato == true ? elemento.classe[13] == '' ? '':alyo+alyowool.classe.sfocato.selezionato.valore+'-'+elemento.classe[13]:elemento.classe[11] == '' ? '':alyo+alyowool.classe.sfocato.normale.valore+'-'+elemento.classe[11],
+    elemento.classe[12] == '' ? '':alyo+alyowool.classe.sfocato.hover.valore+'-'+elemento.classe[12],
+
+    ]" [ngStyle]="{'background-color': hover ? 'rgb('+rgb(elemento.classe[15])?.r+','+rgb(elemento.classe[15])?.g+','+rgb(elemento.classe[15])?.b+','+elemento.classe[9]/100+')':elemento.eventi[0].selezionato == true ? 'rgb('+rgb(elemento.classe[16])?.r+','+rgb(elemento.classe[16])?.g+','+rgb(elemento.classe[16])?.b+','+elemento.classe[10]/100+')':'rgb('+rgb(elemento.classe[14])?.r+','+rgb(elemento.classe[14])?.g+','+rgb(elemento.classe[14])?.b+','+elemento.classe[8]/100+')', }"
+        (mouseover)="hover=true" (mouseleave)="hover=false">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+            <button (click)="pannello_aggiungi = !pannello_aggiungi;  aggiornapiano(pannello_aggiungi); " class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; left:  0px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.piu.valore"></fa-icon></button>
+            <button (click)="verticale=!verticale;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; left:  30px;">                                 <fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.lista.valore">                </fa-icon></button>
+            <button (click)="panello_tipicomponenti = !panello_tipicomponenti" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px" style="top: 10px; right:  60px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.a.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello_eventi = !alyowool.pannello_eventi" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px  alyo-bordo-0px"
+                style="top: 10px; right:  30px;"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.occhio.valore">                </fa-icon></button>
+            <button (click)="alyowool.elemento_selezionato = elemento;alyowool.pannello = !alyowool.pannello;" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+                style="top: 10px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.css.valore">                  </fa-icon></button>
+            <!-- <button (click)="cancella = !cancella" class="alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-trasparente-bianco-hover-30 alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 10px; right: 0px;">                 <fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.cestino.valore">              </fa-icon></button> -->
+        </div>
+
+        <alyosfondo *ngIf="elemento.componente.tipo == 'AS'" [alyowool]="alyowool"></alyosfondo>
+        <alyocontenutiscorrevoli *ngIf="elemento.componente.tipo == 'ACS'" [elemento]="elemento" [alyowool]="alyowool" (alyocontenutiscorrevoli)="alyocontenutiscorrevoli = $event"></alyocontenutiscorrevoli>
+
+    </div>
+
+</div>
