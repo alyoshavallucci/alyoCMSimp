@@ -13495,6 +13495,10 @@ body {
     background-size: 200px 200px;
 }
 
+.alyo-sfondo {
+    background-size: 100px 100px;
+}
+
 .alyo-bordo-8F8F8F-1px {
     border: 1px solid #8F8F8F
 }
@@ -13620,33 +13624,33 @@ input:focus {
 -------------------------------------------------------------------------------------------------------------------------*/
 
 .alyo-sfocato-0px {
-    -webkit-backdrop-filter: blur(0px) !important;
     backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
 }
 
 .alyo-sfocato-10px {
-    -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .alyo-sfocato-20px {
-    -webkit-backdrop-filter: blur(20px) !important;
     backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
 }
 
 .alyo-sfocato-30px {
-    -webkit-backdrop-filter: blur(30px) !important;
     backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
 }
 
 .alyo-sfocato-40px {
-    -webkit-backdrop-filter: blur(40px) !important;
     backdrop-filter: blur(40px) !important;
+    -webkit-backdrop-filter: blur(40px) !important;
 }
 
 .alyo-sfocato-50px {
-    -webkit-backdrop-filter: blur(50px) !important;
     backdrop-filter: blur(50px) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
 }
 
 
@@ -13888,6 +13892,10 @@ input:focus {
 
 .alyo-trasparente-bianco-hover-90:hover {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+.alyo-trasparente-bianco-hover-100:hover {
+    background-color: rgba(255, 255, 255, 1);
 }
 
 

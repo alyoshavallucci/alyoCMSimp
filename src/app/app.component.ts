@@ -25,6 +25,12 @@ export class AppComponent {
   lista_colori:     any = [];
   lista_componenti: any = []
 
+  evento:          any = []
+  azione:          any = []
+  visualizzazione: any = []
+
+  lista_eventi:    any = []
+
   pc:               any = [];
   pannello = false;
   pannello_eventi   = false;
@@ -131,7 +137,7 @@ export class AppComponent {
   constructor(private alyoservice: AlyoService){}
 
   ngOnInit(): void {
-
+    this.inserimento()
     setTimeout(() => {
       this.caricamento();
       this.lista_funzioni();
@@ -222,6 +228,27 @@ export class AppComponent {
         CMP: {nome: "contenitore",tabella: "alyocomponenti", attributi: [{nome: "tipo"  ,valore: 0}]                          ,classi: [this.pc.col,this.pc.colsm,this.pc.margine,this.pc.padding,this.pc.larghezza,this.pc.altezza,this.pc.bordorotondo,this.pc.ombra,this.pc.trasparente,this.pc.trasparentehover,this.pc.trasparenteselezionato,this.pc.sfocatonormale,this.pc.sfocatohover,this.pc.sfocatoselezionato,this.pc.colore,this.pc.colorehover,this.pc.coloreselezionato]},
       }
 
+      this.evento = [
+        {id:  "",     nome: "Nessun Elemento"},
+        {id:  "CLK",  nome: "Click"},
+        {id:  "DCLK", nome: "Doppio Click"},
+        {id:  "CLKP", nome: "Click Prolungato"},
+      ]
+
+      this.azione = [
+        {id:  "",     nome: "Nessun Elemento"},
+        {id:  "CLR",  nome: "Colorazione"},
+        {id:  "CMP",  nome: "Comparsa"},
+        {id:  "SCMP", nome: "Scomparsa"},
+        {id:  "CMPS", nome: "Comparsa e scoparsa"},
+      ]
+
+      this.visualizzazione = [
+        {id:  "",     nome: "Nessun Elemento"},
+        {id:  "SQNZ", nome: "Sequenza"},
+        {id:  "CNTP", nome: "Contenitore Padre"}
+      ]
+
       var formdate = new FormData();
       formdate.append("opzione","albero");
       formdate.append("padre","403");
@@ -234,10 +261,20 @@ export class AppComponent {
         this.elemento = this.creazione(dati[0])
         this.elemento = this.assegnazione(this.elemento)
 
-        //this.s("this.lista_componenti: ",this.lista_componenti)
+        this.s("this.lista_bottoni: ",this.lista_bottoni)
       
       })
 
+  }
+
+  inserimento(){
+
+    var evento = {id: 0, 
+        evento:          {id: "CLK", id_componente: 465, pannello: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]},
+        azione:          {id: "CLR", id_componente: 443, pannello: false,pannello_elementi: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]},
+        visualizzazione: {id: "SQNZ",id_componente: 445, pannello: false,pannello_elementi: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]}
+    }
+    this.lista_eventi.push(evento)
   }
 
   creazione(elemento: any){
@@ -316,6 +353,7 @@ export class AppComponent {
   
   aggiornasfondo(){
     $('body').css('background-image', 'url('+this.percorso.false+this.sfondi[""+this.alyocolore.modalitachiara+""] + ')');
+    $('.alyo-sfondo').css('background-image', 'url('+this.percorso.false+this.sfondi[""+this.alyocolore.modalitachiara+""] + ')');
   }
 
   // lingua(){

@@ -6,19 +6,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./alyocontenitorelabel.component.css']
 })
 export class AlyocontenitorelabelComponent {
+
   @Input()  alyowool:        any = null;
-  @Input()  alyocolore:      any = null;
-  @Input()  alyocontenitori: any = null;
   @Input()  selezionato:     any = null;
-  @Input()  valori:          boolean = false;
   @Input()  elemento:        any = null;
-  @Input()  lista_classe:    any = null;
-  @Input()  tipo_classe:     any = null;
+  @Input()  valori:          boolean = false;
+  @Input()  scala:           string = "1";
+
   @Output() alyocontenitore = new EventEmitter();
   @Output() eventobottoni   = new EventEmitter();
 
-  alyo="alyo-"
+  alyo  = "alyo-"
   hover = false;
+  
   ngOnInit(): void {}
 
   rgba(colore: any){
@@ -40,7 +40,7 @@ export class AlyocontenitorelabelComponent {
     } : null;
   }
 
-    individuacolore(colore: any){
+  individuacolore(colore: any){
 
     //this.alyowool.s("this.alyocolore: ",this.alyowool.alyocolore.variabile)
     if(colore == "mc"){return this.alyowool.alyocolore.variabile}
@@ -49,4 +49,5 @@ export class AlyocontenitorelabelComponent {
     return "";
     
   }
+
 }
