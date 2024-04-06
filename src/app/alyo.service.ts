@@ -10,8 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class AlyoService {
 
 
-  perorso = "/api/php/"
-  percorsi = [this.perorso+"caricamento.php",
+  perorso = "/api/impostazioni/php/"
+  percorsi = [this.perorso+"caricamento2.0.php",
               this.perorso+"inserimento.php",
               this.perorso+"modifica.php",
               this.perorso+"cancellazione.php",

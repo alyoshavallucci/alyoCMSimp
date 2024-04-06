@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import * as $ from 'jquery';
-import { faPlus, faMinus, faBars, faGripVertical, faXmark, faTrash, faClone, faArrowUpFromBracket, faPhone, faArrowDownWideShort, faCircleChevronLeft, faRightLeft, faImage, faListUl, faFolder, faChevronLeft, faFileCode, faHome, faGear, faListOl, faIcons,faCircleDot, faEye, faA, faUser, faCalendarDays, faLocationDot, faFontAwesome, faGlobe, faCar, faEnvelope, faUtensils, faBriefcase, faBuilding, faMapLocationDot, faGraduationCap, faSchool, faCheckToSlot, faEarthEurope, faAppleAlt, faLaptopCode, faFont, faBrain, faUserTie, faDiagramProject, faNoteSticky } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faBars, faGripVertical, faXmark, faTrash, faClone, faArrowUpFromBracket, faPhone, faArrowDownWideShort, faCircleChevronLeft, faRightLeft, faImage, faListUl, faFolder, faChevronLeft, faFileCode, faHome, faGear, faListOl, faIcons,faCircleDot, faEye, faA, faUser, faCalendarDays, faLocationDot, faFontAwesome, faGlobe, faCar, faEnvelope, faUtensils, faBriefcase, faBuilding, faMapLocationDot, faGraduationCap, faSchool, faCheckToSlot, faEarthEurope, faAppleAlt, faLaptopCode, faFont, faBrain, faUserTie, faDiagramProject, faNoteSticky, faEquals,faEyeSlash, faBrush } from '@fortawesome/free-solid-svg-icons'
 import { AlyoService } from './alyo.service';
 
 @Component({
@@ -23,24 +23,44 @@ export class AppComponent {
 
   lista_bottoni:    any = [];
   lista_colori:     any = [];
-  lista_componenti: any = []
+  lista_componenti: any = [];
+  
 
-  evento:          any = []
-  azione:          any = []
-  visualizzazione: any = []
+  evento: any = [
+    {tipo:  "0",    nome: "Nessun Elemento"},
+    {tipo:  "CLK",  nome: "Click"},
+    {tipo:  "DCLK", nome: "Doppio Click"},
+    {tipo:  "CLKP", nome: "Click Prolungato"},
+  ]
+
+  azione: any = [
+    {tipo:  "0",    nome: "Nessun Elemento"},
+    {tipo:  "CLR",  nome: "Colorazione"},
+    {tipo:  "DCLR", nome: "Decolorazione"},
+    {tipo:  "CLRD", nome: "Colorazione e decolorazione"},
+    {tipo:  "CMP",  nome: "Comparsa"},
+    {tipo:  "SCMP", nome: "Scomparsa"},
+    {tipo:  "CMPS", nome: "Comparsa e scoparsa"},
+  ]
+
 
   lista_eventi:    any = []
 
   pc:               any = [];
-  pannello = false;
-  pannello_eventi   = false;
-  selezionato       = true;
+  pannello           = false;
+  pannello_eventi    = false;
+  selezionato        = true;
+  azione_selezionato: any;
 
   velocita: any = "10000";
 
   elemento: any = [];
   elemento_selezionato: any = {};
-  componente: any = []
+  componente: any = [];
+
+  sezione_panello_eventi = 0;
+  evento_selezionato: any;
+  elemento_evento_selezionato: any; 
 
   percorso = {
     true:  "./../",
@@ -54,7 +74,7 @@ export class AppComponent {
               
   colori_esadecimali = {"bianco":"ffffff",nero:"000000","rosso": "ff0000","verde":"00ff00","blu":"0000ff","rosavivo":"FF007F","giallo":"FFFF00","viola":"800080","marrone":"964B00","arancione":"FF6600","turchese":"30D5C8","orchidea":"DA70D6","giallofluo":"e2f705","rosafluo":"f50b86","arancionefluo":"ff6f00","verdefluo":"a3f307","azzurrofluo":"05f9e2","grigio5":"F7F7F7","grigio10":"EFEFEF" ,"grigio15":"8F8F8F","grigio20":"D2D2D2","grigio25":"C0C0C0","grigio30":"B2B2B2", "grigio35":"A2A2A2", "grigio40":"8F8F8F", "grigio50":"808080", "grigio60":"5F5F5F", "grigio70":"4F4F4F",  "grigio75":"404040", "grigio80":"2F2F2F", "grigioasparago":"465945", "grigioardesiascuro":"2F4F4F", "grigioardesiachiaro":"778899", "grigiocenere":"E4E5E0",  "grigiotopo":"646B63"}
   colori: any        = ["bianco","nero","rosso","verde","blu","rosavivo","giallo","viola","marrone","arancione","turchese","orchidea","giallofluo","rosafluo","arancionefluo","verdefluo","azzurrofluo","grigio5","grigio10" ,"grigio15","grigio20","grigio25" ,"grigio30" , "grigio35" , "grigio40" , "grigio50" , "grigio60" , "grigio70" ,  "grigio75" , "grigio80" , "grigioasparago", "grigioardesiascuro" , "grigioardesiachiaro" , "grigiocenere" ,  "grigiotopo"];
-  fa: any            = {fa: ['a','home','piu','meno','lista','listanumeri','griglia','cestino',"copia","condividi","telefono","x","ordine","indietro","scambio","scambio","cartella","indietro","css",'impostazioni','icone','cerchiopunto','occhio',"utente","calendario","locazione","nazione","internet","macchina","email","ristorante","lavoro","azienda","indirizzo","istruzione","scuola","lingua","mela","software","font","voto","capacita","progetto","referente","nota"],
+  fa: any            = {fa: ['a','home','piu','meno','lista','listanumeri','griglia','cestino',"copia","condividi","telefono","x","ordine","indietro","scambio","scambio","cartella","indietro","css",'impostazioni','icone','cerchiopunto','occhio','occhiochiuso',"utente","calendario","locazione","nazione","internet","macchina","email","ristorante","lavoro","azienda","indirizzo","istruzione","scuola","lingua","mela","software","font","voto","capacita","progetto","referente","nota","evento","colore"],
   "a":{nome: "a",valore: faA},"":{nome:"",valore:""},"home":{nome:"home",valore:faHome}, 
   piu: {nome: "piu",valore: faPlus}, meno: {nome: "meno",valore: faMinus}, 
   lista: {nome: "lista",valore: faBars},listanumeri: {nome: "listanumeri",valore: faListOl},
@@ -66,7 +86,9 @@ export class AppComponent {
   listaul: {nome: "Lista",valore: faListUl}, cartella: {nome: "Cartella", valore: faFolder},
   inditero: {nome: "indietro",valore: faChevronLeft},css:{nome: "css",valore: faFileCode},
   impostazioni:{nome: "Impostazioni",valore: faGear},icone:{nome: "icone",valore: faIcons},
-  cerchiopunto:{nome: "cerchiopunto",valore: faCircleDot},occhio:{nome: "occhio",valore: faEye},
+  cerchiopunto:{nome: "cerchiopunto",valore: faCircleDot},
+  occhio:{nome: "occhio",valore: faEye},
+  occhiochiuso:{nome: "occhiochiuso",valore: faEyeSlash},
   utente: {nome: "utente",valore: faUser}, 
   calendario: {nome: "calendario",valore: faCalendarDays},
   locazione: {nome: "locazione",valore: faLocationDot}, 
@@ -88,7 +110,9 @@ export class AppComponent {
   capacita: {nome: "capacita",valore: faBrain}, 
   referente: {nome: "referente",valore: faUserTie}, 
   progetto: {nome: "progetto",valore: faDiagramProject},
-  nota: {nome: "nota",valore: faNoteSticky}
+  nota: {nome: "nota",valore: faNoteSticky},
+  evento: {nome:  "evento",valore: faEquals},
+  colore: {nome:  "colore",valore: faBrush}
 
 }
 
@@ -137,7 +161,7 @@ export class AppComponent {
   constructor(private alyoservice: AlyoService){}
 
   ngOnInit(): void {
-    this.inserimento()
+    
     setTimeout(() => {
       this.caricamento();
       this.lista_funzioni();
@@ -228,27 +252,6 @@ export class AppComponent {
         CMP: {nome: "contenitore",tabella: "alyocomponenti", attributi: [{nome: "tipo"  ,valore: 0}]                          ,classi: [this.pc.col,this.pc.colsm,this.pc.margine,this.pc.padding,this.pc.larghezza,this.pc.altezza,this.pc.bordorotondo,this.pc.ombra,this.pc.trasparente,this.pc.trasparentehover,this.pc.trasparenteselezionato,this.pc.sfocatonormale,this.pc.sfocatohover,this.pc.sfocatoselezionato,this.pc.colore,this.pc.colorehover,this.pc.coloreselezionato]},
       }
 
-      this.evento = [
-        {id:  "",     nome: "Nessun Elemento"},
-        {id:  "CLK",  nome: "Click"},
-        {id:  "DCLK", nome: "Doppio Click"},
-        {id:  "CLKP", nome: "Click Prolungato"},
-      ]
-
-      this.azione = [
-        {id:  "",     nome: "Nessun Elemento"},
-        {id:  "CLR",  nome: "Colorazione"},
-        {id:  "CMP",  nome: "Comparsa"},
-        {id:  "SCMP", nome: "Scomparsa"},
-        {id:  "CMPS", nome: "Comparsa e scoparsa"},
-      ]
-
-      this.visualizzazione = [
-        {id:  "",     nome: "Nessun Elemento"},
-        {id:  "SQNZ", nome: "Sequenza"},
-        {id:  "CNTP", nome: "Contenitore Padre"}
-      ]
-
       var formdate = new FormData();
       formdate.append("opzione","albero");
       formdate.append("padre","403");
@@ -257,33 +260,25 @@ export class AppComponent {
 
         //this.s("DATI HOME: ",dati)
     
-        this.lista_bottoni.push("")
         this.elemento = this.creazione(dati[0])
-        this.elemento = this.assegnazione(this.elemento)
+        this.carica_eventi();
 
-        this.s("this.lista_bottoni: ",this.lista_bottoni)
+        //this.elemento_selezionato = this.lista_componenti.filter((ele: any)=>{ return ele.tipo=="BTN" })[0];
+        //this.pannello_eventi = true;
+        //this.s("this.elemento: ",this.elemento)
       
       })
 
   }
 
-  inserimento(){
-
-    var evento = {id: 0, 
-        evento:          {id: "CLK", id_componente: 465, pannello: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]},
-        azione:          {id: "CLR", id_componente: 443, pannello: false,pannello_elementi: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]},
-        visualizzazione: {id: "SQNZ",id_componente: 445, pannello: false,pannello_elementi: false,selezionato: {id:  "",     nome: "Nessun Elemento"},elemento: this.lista_componenti[0]}
-    }
-    this.lista_eventi.push(evento)
-  }
-
   creazione(elemento: any){
 
+    elemento['selezionato']=false;
+    elemento.classe = elemento.classe.split(",");
+    elemento.effetti = elemento.effetti.split(",");
     this.lista_componenti.push(elemento)
 
-    elemento.classe = elemento.classe.split(",");
-    elemento.eventi = elemento.eventi.split(",");
-    if(elemento.tipo == "BTN"){this.lista_bottoni.push(elemento);elemento['selezionato']=this.selezionato; this.selezionato=false;}
+    if(elemento.tipo == "BTN"){elemento['eventi_2'] = [];}
     try{ 
       for(var i=0; i<elemento.lista_componenti.length; i++){ 
         elemento.lista_componenti[i] = this.creazione(elemento.lista_componenti[i]);   
@@ -294,26 +289,135 @@ export class AppComponent {
     return elemento;
   }
 
-  assegnazione(elemento: any){
+  carica_eventi(){
+
+    var lista_bottoni = this.lista_componenti.filter((ele: any)=>{ return ele.tipo=="BTN" })
+    //this.s("lista_bottoni",lista_bottoni)
+
+    var condizione = "alyoeventi.id_componente = '"+lista_bottoni[0].id+"' ";
+    for(var i=1; i<lista_bottoni.length; i++){
+      lista_bottoni[i]['eventi_2']=[]
+      condizione += "OR alyoeventi.id_componente = '"+lista_bottoni[i].id+"' ";
+    }
+
+    var formdate = new FormData();
+    //var sql = "SELECT alyoeventi.id, alyoeventi.tipo, alyoeventi.id_componente, alyoazioni.id, alyoazioni.tipo, alyoazioni.id_componente FROM alyoeventi INNER JOIN alyoazioni ON alyoeventi.id == alyoazioni.id_evento";
+    var sql = "SELECT * FROM alyoeventi WHERE "+condizione;
+    //this.s("SQL: ",sql)
+    formdate.append("opzione","selezione");
+    formdate.append("sql",sql);
     
-    if(elemento.eventi[0] != 0){
-      //this.alyowool.s("this.lista_bottoni.find((elemento: any) => {return elemento.id}): ",this.lista_bottoni.find((ele: any) => {return ele.id == elemento.eventi[0]}))
-      elemento.eventi[0] = this.lista_bottoni.find((ele: any) => {return ele.id == elemento.eventi[0]})
+    this.alyoservice.alyo_caricamento(formdate).subscribe(dati => {
+
+      //this.s("DATI HOME: ",dati)
+
+      var sql_azioni = ""
+      for(var ele of dati){
+
+        var evento = {
+          id:           ele.id, 
+          tipo:         this.evento.find((elem: any) =>           { return elem.tipo == ele.tipo }),
+          elemento:     this.lista_componenti.find((elem: any) => { return elem.id == ele.id_componente }), 
+          lista_azioni: [],
+          pannello:     false
+        }
+
+        var elem = this.lista_componenti.find((elem: any) => { return elem.id == ele.id_componente })
+        elem['eventi_2'].push(evento);
+
+        sql_azioni = sql_azioni+ "alyoazioni.id_evento = "+ele.id+" OR "
+      }
+
+      sql_azioni = sql_azioni.slice(0, -4);
+
+      //this.s("sql_azioni: ",sql_azioni)
+
+      var formdate = new FormData();
+      var sql = "SELECT * FROM alyoazioni WHERE "+sql_azioni;
+
+      //this.s("SQL: ",sql)
+      formdate.append("opzione","selezione");
+      formdate.append("sql",sql);
+      
+      this.alyoservice.alyo_caricamento(formdate).subscribe(dati2 => {
+
+        this.s("DATI2 HOME: ",dati2)
+    
+        for(var ele of dati2){
+          for(var ele2 of lista_bottoni){
+            var evento2 = ele2.eventi_2.find((elem2: any)=>{return elem2.id == ele.id_evento })
+
+            if(evento2){
+              var azione = {
+                id:           ele.id, 
+                tipo:         this.azione.find((elem: any) =>           { return elem.tipo == ele.tipo }),
+                elemento:     this.lista_componenti.find((elem: any) => { return elem.id == ele.id_componente }), 
+                id_evento:    ele.id_evento,
+                pannello:     false
+              }
+              evento2.lista_azioni.push(azione);
+            }
+          }
+        }
+
+        //this.s("lista_bottoni: ",lista_bottoni)
+      })
+
+      
+    })
+
+  }
+
+  inserimento(attributi: any){
+
+    this.s("attributi: ",attributi)
+    var formdate = new FormData();
+
+    if(attributi.tabella == "alyoeventi"){
+      
+      if(attributi.funzione == "nuovo"){
+     
+        var tipo = this.evento[0].tipo;
+        var id_componente = this.elemento_selezionato.id;
+        var sql = "INSERT INTO alyoeventi (tipo,id_componente) VALUES ("+tipo+","+id_componente+")";
+        formdate.append("sql",sql);
+        this.alyoservice.alyo_inserimento(formdate).subscribe(dati => {
+          
+          this.s("DATI: ",dati)
+          if(dati.response){
+            var evento = {id: dati.id, tipo: this.evento[0], elemento: this.elemento_selezionato, pannello: false, lista_azioni: []}
+            this.elemento_selezionato.eventi_2.push(evento)
+          }
+
+          //this.s("this.elemento_selezionato.eventi_2: ",this.elemento_selezionato.eventi_2)
+               
+        });
+      }
     }
 
-    if(elemento.eventi[1] != 0){
-      //this.alyowool.s("this.lista_bottoni.find((elemento: any) => {return elemento.id}): ",this.lista_bottoni.find((ele: any) => {return ele.id == elemento.eventi[1]}))
-      elemento.eventi[1] = this.lista_bottoni.find((ele: any) => {return ele.id == elemento.eventi[1]})
+    if(attributi.tabella == "alyoazioni"){
+      
+      var tipo = this.azione[0].tipo;
+      var id_componente = this.lista_componenti[0].id;
+      var id_evento = attributi.elemento_evento.id
+
+      var sql = "INSERT INTO "+attributi.tabella+" (tipo,id_componente,id_evento) VALUES ("+tipo+","+id_componente+","+id_evento+")";
+      //this.s("sql: ",sql)
+      formdate.append("sql",sql);
+      this.alyoservice.alyo_inserimento(formdate).subscribe(dati => {
+        
+        this.s("DATI: ",dati)
+        if(dati.response){
+          var azione = {id: dati.id, tipo: this.azione[0],elemento: this.elemento_selezionato,id_componente: attributi.elemento_evento.id, pannello: false}
+          attributi.elemento_evento.lista_azioni.push(azione)
+        }
+
+        //this.s("this.elemento_selezionato.eventi_2: ",this.elemento_selezionato.eventi_2)
+             
+      });
     }
 
-    try{ 
-      for(var i=0; i<elemento.lista_componenti.length; i++){ 
-        elemento.lista_componenti[i] = this.assegnazione(elemento.lista_componenti[i]);   
-      } 
-    }
-    catch{}
-
-    return elemento;
+    //this.s("this.elemento_selezionato: ",this.elemento_selezionato)
   }
 
   convertiarraystringa(funzione: any,elemento: any){
@@ -375,7 +479,7 @@ export class AppComponent {
 
     this.alyowool.s("attributi: ",attributi)
 
-    if(attributi.funzione == "classe"){
+    if(attributi.tabella == "alyocontenitori"){
       
       var provisorio = attributi.valore
       provisorio[attributi.posizione] = attributi.elemento
@@ -385,49 +489,64 @@ export class AppComponent {
       formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio.join(',')+"' WHERE id = "+attributi.id);
   
       this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
-        this.alyowool.s("DATI: { ",dati.messaggio+" } { "+dati.response+" }")
+        //this.alyowool.s("dati: ",dati)
         if(dati.response){   
           attributi.valore[attributi.posizione] = attributi.elemento;
         } 
       });
     }
 
-    if(attributi.funzione == "eventi"){
+    if(attributi.tabella == "alyoeventi"){
 
-      var provisorio = this.elemento_selezionato.eventi
-      provisorio[attributi.posizione] = attributi.valore != '' ? attributi.valore:0
-
-      var valori = [this.elemento_selezionato.eventi[0].id != undefined ? this.elemento_selezionato.eventi[0].id:0
-                   ,this.elemento_selezionato.eventi[1].id != undefined ? this.elemento_selezionato.eventi[1].id:0]
-      valori[attributi.posizione] = attributi.valore != '' ? attributi.valore.id:0
-
+      var provisorio = attributi.elemento.tipo
+      var sql = "UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio+"' WHERE id = "+attributi.elemento_evento.id
+      
+      // this.s("provisorio: ",provisorio)
+      // this.s("sql: ",sql)
 
       var formdate = new FormData();
-      formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+valori.join(',')+"' WHERE id = "+this.elemento_selezionato.id);
-
+      formdate.append("sql",sql);
+  
       this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
-
-        //this.alyowool.s("dati: ",dati)
+        this.s("DATI: ",dati)
         if(dati.response){   
-          this.elemento_selezionato.eventi[attributi.posizione] = attributi.valore;
+          attributi.elemento_evento[attributi.attributo] = attributi.elemento;
         } 
       });
+      
+    
+      // elemento2.evento.selettore = elemento3; 
     }
 
-    // if(attributi.tabella == "alyoicone"){
-    //   var provisorio = this.elemento.classe
-    //   provisorio[attributi.posizione]=attributi.elemento;
-    //   var formdate = new FormData();
-    //   formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+attributi.valore+"' WHERE id = "+attributi.id);
+    if(attributi.tabella == "alyoazioni"){
 
-    //   this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
-    //     this.alyowool.s("DATI: { ",dati.messaggio+" } { "+dati.response+" }")
-    //     if(dati.response){   
-    //       this.elemento_selezionato.componente["valore"] = attributi.valore;
-    //     } 
-    //   });
-    // }
-    
+      var sql = "";
+      if(attributi.attributo == "tipo"){
+        var provisorio = attributi.elemento.tipo
+        sql = "UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio+"' WHERE id = "+attributi.elemento_azione.id
+      }
+
+      if(attributi.attributo == "id_componente"){
+        var provisorio = attributi.elemento.id
+        sql = "UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio+"' WHERE id = "+this.azione_selezionato.id
+      }
+
+      //this.s("provisorio: ",provisorio)
+      //this.s("sql: ",sql)
+
+      var formdate = new FormData();
+      formdate.append("sql",sql);
+  
+      this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
+        //this.s("DATI: ",dati);
+
+        if(dati.response){  
+          if(attributi.attributo == "tipo")         {attributi.elemento_azione[attributi.attributo] = attributi.elemento}
+          if(attributi.attributo == "id_componente"){this.azione_selezionato.elemento = attributi.elemento}   
+        } 
+      });
+      
+    }   
   }
 
   s(intestazione: any, testo: any){
@@ -436,7 +555,5 @@ export class AppComponent {
     console.log(testo);
     console.log();
   }
-
-
 
 }

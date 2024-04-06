@@ -119,7 +119,7 @@ export class AlyofileComponent implements OnInit {
     var formdate = new FormData();
     formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+provisorio+"' WHERE id = "+this.file.id);
     this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
-      this.s("DATI: ",dati)
+      //this.s("DATI: ",dati)
       if(dati.response){
          this.file.src.valore = provisorio;
       } 
@@ -214,7 +214,7 @@ export class AlyofileComponent implements OnInit {
     formdate.append("estensioni",this.estensioni.join(","));
 
     this.alyoservice.alyo_file(formdate).subscribe(dati => {
-      this.s("dati: ",dati)
+      //this.s("dati: ",dati)
       this.lista_cartelle_iniziali = dati;
       this.lista_cartelle = dati
     });
@@ -254,14 +254,14 @@ export class AlyofileComponent implements OnInit {
       formdate.append('nuovofile',file.name);
 
       this.alyoservice.alyo_file(formdate).subscribe(dati => {  
-        this.s("DATI: ",dati.messaggio)
+        //this.s("DATI: ",dati.messaggio)
        if(dati.response){ 
 
           var formdate = new FormData();
           formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+percorso+file.name+"' WHERE id = "+this.file.id);
       
           this.alyoservice.alyo_modifica(formdate).subscribe(dati2 => {
-            this.s("DATI: ",dati2.messaggio)
+            //this.s("DATI: ",dati2.messaggio)
             if(dati2.response){  
               this.file.src.valore = percorso+file.name;
               lista.push(percorso+file.name);

@@ -17,7 +17,7 @@ export class AlyocontenitoreComponent {
   @Input()  tipo_classe:     any = null;
   @Input()  componente:      any = null;
   @Input()  pannello_classi: any = null;
-  @Input()  selezionato:     any = null;
+
   @Input()  alyocontenutiscorrevoli: any = null;
 
   @Output() alyocontenitore = new EventEmitter()
@@ -26,7 +26,7 @@ export class AlyocontenitoreComponent {
 
   hover = false;
   panello_bottoni = false;
-
+  visibile: string = "si";
 
   alyo = "alyo-"
   alyocontenitore3: any = null;
@@ -51,66 +51,6 @@ export class AlyocontenitoreComponent {
   constructor(private alyoservice: AlyoService){}
 
   ngOnInit(): void {this.elemento['ele']=this;}
-
-  //--------------------OPERAZIONI------------------------
-
-
-  //--------------------ALTRI FUNZIONI------------------------
-
-  // rgba(colore: any){
-
-  //   colore = this.individuacolore(colore)
-  //   colore = this.alyowool.colori_esadecimali[colore]
-  //   return [this.rgb(colore)?.r,this.rgb(colore)?.g,this.rgb(colore)?.b]
-  // }
-
-  // rgb(colore: any) {
-
-  //   colore = this.individuacolore(colore)
-  //   var esadecimale = this.alyowool.colori_esadecimali[colore]
-  //   var risultato = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(esadecimale);
-  //   return risultato ? {
-  //     r: parseInt(risultato[1], 16),
-  //     g: parseInt(risultato[2], 16),
-  //     b: parseInt(risultato[3], 16)
-  //   } : null;
-    
-  // }
-
-  // individuacolore(colore: any){
-
-  //   //this.alyowool.s("this.alyocolore: ",this.alyowool.alyocolore.variabile)
-  //   if(colore == "mc"){return this.alyowool.alyocolore.variabile}
-  //   if(this.alyowool.alyocolore.fisso[colore] != undefined){return this.alyowool.alyocolore.fisso[colore]}
-  //   if(this.alyowool.alyowool.colori.includes(colore)){return colore}
-  //   return "";
-    
-  // }
-
-  // aggiornapiano(evento: any){
-   
-  //   //this.alyowool.s("EVENTO: ",evento)
-  //   if(evento){
-  //     this.elemento.piano = 1;
-  //     this.eventopiano.emit(1);
-  //   }else{     
-  //     this.elemento.piano = 0;
-  //     this.eventopiano.emit(-1);
-  //   }
-
-  // }
-  
-  // aggiornabottoni(elementoselezionato: any){
-
-  //   for(var elemento2 of this.alyowool.lista_bottoni.filter((elemento2: any) => {return elemento2 != ''?elemento2.componente.tipo == 1:''})){
-  //     elemento2.selezionato = false;
-  //   }
-
-  //   elementoselezionato.selezionato = !elementoselezionato.selezionato;
-    
-  // }
-
-    //--------------------OPERAZIONI------------------------
 
     caricamento(){}
 
@@ -137,17 +77,15 @@ export class AlyocontenitoreComponent {
           componente[elemento1.nome] = elemento1.valore;
         }
         
-    
-  
         if(attributi.tipo == "CNT"){
    
-          sql = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,livello,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+this.creavettore(this.alyowool.componente.CNT.classi.length,"").join(',')+"','"+attributi.tipo+"',0,1,"+attributi.elemento.id+")"
+          sql = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,visibilita,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+this.creavettore(this.alyowool.componente.CNT.classi.length,"").join(',')+"','"+attributi.tipo+"',0,s,"+attributi.elemento.id+")"
           formdate.append("sql",sql);
           this.alyoservice.alyo_inserimento(formdate).subscribe(dati => {
             
             //this.alyowool.s("DATI: ",dati)
             if(dati.response){
-              this.elemento.lista_componenti.push({id: dati.id,posizione: this.elemento.lista_componenti.length,classe: this.creavettore(this.alyowool.componente.CNT.classi.length,""),tipo: attributi.tipo,id_componente: 0,livello: 1,eventi: [0,0],id_padre: attributi.elemento.id,lista_componenti: []})
+              this.elemento.lista_componenti.push({id: dati.id,posizione: this.elemento.lista_componenti.length,classe: this.creavettore(this.alyowool.componente.CNT.classi.length,""),tipo: attributi.tipo,id_componente: 0,visibilita: 's',eventi: [0,0],id_padre: attributi.elemento.id,lista_componenti: []})
             } 
             if(this.elemento.selezionato != undefined){this.elemento.lista_componenti[this.elemento.lista_componenti.length-1][this.elemento.selezionato]= this.elemento.selezionato;}        
           });
@@ -160,19 +98,19 @@ export class AlyocontenitoreComponent {
               this.alyowool.s("DATI: ",dati)
               if(dati.response){
     
-                var sql_contenitore = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,livello,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,"").join(',')+"','"+attributi.tipo+"',"+dati.id+",1,"+attributi.elemento.id+")"
+                var sql_contenitore = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,visibilita,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,"").join(',')+"','"+attributi.tipo+"',"+dati.id+",s,"+attributi.elemento.id+")"
                 formdate.append("sql",sql_contenitore);
                 this.alyoservice.alyo_inserimento(formdate).subscribe(dati2 => {
                   this.alyowool.s("DATI2: ",dati2)
                   if(dati2.response){
                      
                     if(attributi.tipo == "LNK" || attributi.tipo == "BTN"){
-                      this.elemento.lista_componenti.push({id: dati2.id,posizione: this.elemento.lista_componenti.length,componente: componente,classe: this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,""),tipo: attributi.tipo,id_componente: 0,livello: 1,eventi: [0,0],id_padre: attributi.elemento.id,lista_componenti: []})
+                      this.elemento.lista_componenti.push({id: dati2.id,posizione: this.elemento.lista_componenti.length,componente: componente,classe: this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,""),tipo: attributi.tipo,id_componente: 0,visibilita: 's',eventi: [0,0],id_padre: attributi.elemento.id,lista_componenti: []})
                       if(attributi.tipo == "BTN"){
                         this.alyowool.lista_bottoni.push(this.elemento.lista_componenti[this.elemento.lista_componenti.length-1]);
                       }
                     }else{
-                      this.elemento.lista_componenti.push({id: dati2.id,posizione: this.elemento.lista_componenti.length,componente: componente,classe: this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,""),tipo: attributi.tipo,id_componente: 0,livello: 1,eventi: [0,0],id_padre: attributi.elemento.id})
+                      this.elemento.lista_componenti.push({id: dati2.id,posizione: this.elemento.lista_componenti.length,componente: componente,classe: this.creavettore(this.alyowool.componente[attributi.tipo].classi.length,""),tipo: attributi.tipo,id_componente: 0,visibilita: 's',eventi: [0,0],id_padre: attributi.elemento.id})
                     }
   
                     if(this.elemento.selezionato != undefined){this.elemento.lista_componenti[this.elemento.lista_componenti.length-1][this.elemento.selezionato]= this.elemento.selezionato;}
@@ -214,13 +152,13 @@ export class AlyocontenitoreComponent {
   
         if(attributi.elemento.tipo == "CNT"){
    
-          sql = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,livello,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+attributi.elemento.classe.join(',')+"','"+attributi.elemento.tipo+"',"+attributi.elemento.id+",1,"+attributi.elementopadre.id+")"
+          sql = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,visibilita,id_padre) VALUES ("+this.elemento.lista_componenti.length+",'"+attributi.elemento.classe.join(',')+"','"+attributi.elemento.tipo+"',"+attributi.elemento.id+",s,"+attributi.elementopadre.id+")"
           formdate.append("sql",sql);
           this.alyoservice.alyo_inserimento(formdate).subscribe(dati => {
             
             //this.alyowool.s("DATI: ",dati)
             if(dati.response){
-              attributi.elementopadre.lista_componenti.push({id: dati.id,posizione: attributi.elementopadre.lista_componenti.length,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: 0,livello: 1,eventi: [0,0],id_padre: attributi.elementopadre.id,lista_componenti: []})
+              attributi.elementopadre.lista_componenti.push({id: dati.id,posizione: attributi.elementopadre.lista_componenti.length,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: 0,visibilita: 's',eventi: [0,0],id_padre: attributi.elementopadre.id,lista_componenti: []})
               for(var elemento2 of attributi.elemento.lista_componenti){
                 this.inserimento({funzione: 'esistente',elementopadre: attributi.elementopadre.lista_componenti[attributi.elementopadre.lista_componenti.length-1],elemento: elemento2}); 
               }
@@ -236,14 +174,14 @@ export class AlyocontenitoreComponent {
               //this.alyowool.s("DATI: ",dati)
               if(dati.response){
     
-                var sql_contenitore = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,livello,id_padre) VALUES ("+attributi.elementopadre.lista_componenti.length+",'"+attributi.elemento.classe.join(',')+"','"+attributi.elemento.tipo+"',"+dati.id+",1,"+attributi.elementopadre.id+")"
+                var sql_contenitore = "INSERT INTO alyocontenitori (posizione,classe,tipo,id_componente,visibilita,id_padre) VALUES ("+attributi.elementopadre.lista_componenti.length+",'"+attributi.elemento.classe.join(',')+"','"+attributi.elemento.tipo+"',"+dati.id+",s,"+attributi.elementopadre.id+")"
                 formdate.append("sql",sql_contenitore);
                 this.alyoservice.alyo_inserimento(formdate).subscribe(dati2 => {
                   //this.alyowool.s("DATI2: ",dati2)
                   if(dati2.response){
                
                     if(attributi.elemento.tipo == "LNK" || attributi.elemento.tipo == "BTN"){
-                      attributi.elementopadre.lista_componenti.push({id: dati2.id,posizione: attributi.elementopadre.lista_componenti.length,componente: componente,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: dati.id,livello: 1,eventi: [0,0],id_padre: attributi.elementopadre.id,lista_componenti: []})  
+                      attributi.elementopadre.lista_componenti.push({id: dati2.id,posizione: attributi.elementopadre.lista_componenti.length,componente: componente,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: dati.id,visibilita: 's',eventi: [0,0],id_padre: attributi.elementopadre.id,lista_componenti: []})  
                       if(attributi.tipo == "BTN"){
                         this.alyowool.lista_bottoni.push(attributi.elementopadre.lista_componenti[attributi.elementopadre.lista_componenti.length-1]);
                       }
@@ -251,7 +189,7 @@ export class AlyocontenitoreComponent {
                         this.inserimento({funzione: 'esistente',elementopadre: attributi.elementopadre.lista_componenti[attributi.elementopadre.lista_componenti.length-1],elemento: elemento2}); 
                       }
                     }else{
-                      attributi.elementopadre.lista_componenti.push({id: dati2.id,posizione: attributi.elementopadre.lista_componenti.length,componente: componente,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: dati.id,livello: 1,eventi: [0,0],id_padre: attributi.elementopadre.id})  
+                      attributi.elementopadre.lista_componenti.push({id: dati2.id,posizione: attributi.elementopadre.lista_componenti.length,componente: componente,classe: attributi.elemento.classe,tipo: attributi.elemento.tipo,id_componente: dati.id,visibilita: 's',eventi: [0,0],id_padre: attributi.elementopadre.id})  
                     }
   
                   }
@@ -271,20 +209,36 @@ export class AlyocontenitoreComponent {
   
       if(attributi.tabella == "alyocontenitori"){
   
-        var provisorio = attributi.valore
-        if(attributi.valore != 0){
-          provisorio = attributi.valore.id
+        if(attributi.attributo == "id_componente"){
+          var provisorio = attributi.valore
+          if(attributi.valore != 0){
+            provisorio = attributi.valore.id
+          }
+    
+          var formdate = new FormData();
+          formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio+"' WHERE id = "+this.elemento.id);
+    
+          this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
+            //this.alyowool.s("dati: ",dati)
+            if(dati.response){   
+              this.elemento.id_componente = attributi.valore.id;
+            } 
+          });
         }
-  
-        var formdate = new FormData();
-        formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo+" = '"+provisorio+"' WHERE id = "+this.elemento.id);
-  
-        this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
-          this.alyowool.s("DATI: { ",dati.messaggio+" } { "+dati.response+" }")
-          if(dati.response){   
-            this.elemento.id_componente = attributi.valore.id;
-          } 
-        });
+
+        if(attributi.attributo == "effetti"){
+      
+          var formdate = new FormData();
+          formdate.append("sql","UPDATE "+attributi.tabella+" SET "+attributi.attributo +" = '"+attributi.valore+"' WHERE id = "+this.elemento.id);
+    
+          this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
+            this.alyowool.s("dati: ",dati)
+            if(dati.response){   
+              this.elemento.effetti = attributi.valore.split(",");
+            } 
+          });
+        }
+
       }
   
       if(attributi.tabella == "alyoicone"){
@@ -527,15 +481,53 @@ export class AlyocontenitoreComponent {
     range(fine: any,intervallo: any){
       return Array((fine/intervallo)+1).fill(intervallo).map((x,i)=>(i)*x);
     }
+
+    /*
+    azione: any = [
+      {tipo:  "0",    nome: "Nessun Elemento"},
+      {tipo:  "CLR",  nome: "Colorazione"},
+      {tipo:  "DCLR", nome: "Decolorazione"},
+      {tipo:  "CLRD", nome: "Colorazione e decolorazione"},
+      {tipo:  "CMP",  nome: "Comparsa"},
+      {tipo:  "SCMP", nome: "Scomparsa"},
+      {tipo:  "CMPS", nome: "Comparsa e scoparsa"},
+    ]
+    */
   
-    aggiornabottoni(elementoselezionato: any){
+    evento(){
   
-      for(var elemento2 of this.alyowool.lista_bottoni.filter((elemento2: any) => {return elemento2 != ''?elemento2.componente.tipo == 1:''})){
-        elemento2.selezionato = false;
+      this.alyowool.s("ELEMENTO: ",this.elemento)
+
+      for(var evento of this.elemento.eventi_2){
+        for(var azione of evento.lista_azioni){
+
+          this.alyowool.s("Azione: ",azione)
+
+          if(azione.tipo.tipo == "CLR"){
+            azione.elemento.effetti[1] = 's'
+          }
+
+          if(azione.tipo.tipo == "DCLR"){
+            azione.elemento.effetti[1] = 'n'
+          }
+
+          if(azione.tipo.tipo == "CLRD"){
+            azione.elemento.effetti[1] = azione.elemento.effetti[1] == 's'?'n':'s';
+          }
+
+          if(azione.tipo.tipo == "CMP"){
+            azione.elemento.effetti[0] = 's'
+          }
+
+          if(azione.tipo.tipo == "SCMP"){
+            azione.elemento.effetti[0] = 'n'
+          }
+
+          if(azione.tipo.tipo == "CMPS"){
+            azione.elemento.effetti[0] = azione.elemento.effetti[1] == 's'?'n':'s'
+          }
+        }
       }
-  
-      elementoselezionato.selezionato = !elementoselezionato.selezionato;
-      
     }
   
     filtro(lista: any){

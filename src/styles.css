@@ -3809,87 +3809,87 @@ body {
 -------------------------------------------------------------------------------------------------------------------------*/
 
 .alyo-piano-0 {
-    z-index: 0;
+    z-index: 0 !important;
 }
 
 .alyo-piano-1 {
-    z-index: 1;
+    z-index: 1 !important;
 }
 
 .alyo-piano-2 {
-    z-index: 2;
+    z-index: 2 !important;
 }
 
 .alyo-piano-3 {
-    z-index: 3;
+    z-index: 3 !important;
 }
 
 .alyo-piano-4 {
-    z-index: 4;
+    z-index: 4 !important;
 }
 
 .alyo-piano-5 {
-    z-index: 5;
+    z-index: 5 !important;
 }
 
 .alyo-piano-6 {
-    z-index: 6;
+    z-index: 6 !important;
 }
 
 .alyo-piano-7 {
-    z-index: 7;
+    z-index: 7 !important;
 }
 
 .alyo-piano-8 {
-    z-index: 8;
+    z-index: 8 !important;
 }
 
 .alyo-piano-9 {
-    z-index: 9;
+    z-index: 9 !important;
 }
 
 .alyo-piano-10 {
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 .alyo-piano-11 {
-    z-index: 11;
+    z-index: 11 !important;
 }
 
 .alyo-piano-12 {
-    z-index: 12;
+    z-index: 12 !important;
 }
 
 .alyo-piano-13 {
-    z-index: 13;
+    z-index: 13 !important;
 }
 
 .alyo-piano-14 {
-    z-index: 14;
+    z-index: 14 !important;
 }
 
 .alyo-piano-15 {
-    z-index: 15;
+    z-index: 15 !important;
 }
 
 .alyo-piano-16 {
-    z-index: 16;
+    z-index: 16 !important;
 }
 
 .alyo-piano-17 {
-    z-index: 17;
+    z-index: 17 !important;
 }
 
 .alyo-piano-18 {
-    z-index: 18;
+    z-index: 18 !important;
 }
 
 .alyo-piano-19 {
-    z-index: 19;
+    z-index: 19 !important;
 }
 
 .alyo-piano-20 {
-    z-index: 20;
+    z-index: 20 !important;
 }
 
 .alyo-piano-21 {
@@ -14019,17 +14019,26 @@ input:focus {
     --bs-gutter-x: 0 !important;
 }
 
-.alyo-bianco-figlio>* {
-    background-color: white;
-}
 
-.alyo-opaco-30-figlio>* {
+/* .alyo-bianco-figlio>* {
+    background-color: white;
+} */
+
+
+/* .alyo-opaco-30-figlio>* {
     opacity: 0.5;
 }
 
 .alyo-sfocato-30px-figlio>* {
     -webkit-backdrop-filter: blur(30px) !important;
     backdrop-filter: blur(30px) !important;
+} */
+
+
+/*------------------- BORDO --------------------*/
+
+.alyo-bordo-blu-1px {
+    border: 1px blue solid;
 }
 
 
