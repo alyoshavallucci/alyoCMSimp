@@ -1,0 +1,238 @@
+<!--PANELLO IMPOSTAZIONI-->
+
+<div *ngIf="alyo.sezione == 'GRUPPI-CLASSI'">
+    <div *ngIf="elemento.tipo == 'GCLS'" class="alyo-bordo-grigio50-1px alyo-bordo-rotondo-20px">
+
+        <div class="alyo-posizione-relativo alyo-altezza-60px">
+
+            <!--BOTTONE AGGIUNGI-->
+            <button (click)="alyo.inserimento({funzione: 'alyogruppiclassi', tabella: 'alyogruppiclassi',tabellacollegamento: 'alyocollegamentigruppiclassi',tipo: 'GCLS',id_padre: elemento.id,padre: elemento,attributo: attributo})" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'"
+                class="alyo-testo-grigio50 alyo-trasparente-bianco-0  alyo-bordo-rotondo-50 alyo-posizione-assoluto alyo-larghezza-40px alyo-altezza-40px  alyo-bordo-0px" style="top: 10px; left: 10px;"><fa-icon class="alyo-testo-20px " [icon]="alyo.fa.piu.valore"></fa-icon>
+            </button>
+
+            <!--BOTTONE ORDINA-->
+            <button (click)="ordine = ordine == 'CRE' ? 'DCR':'CRE'; elemento.lista.reverse();" style="top: 10px; left: 50px" [ngClass]="['alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30',ordine == 'DCR' ? 'alyo-testo-'+this.alyo.colore('MC'):'alyo-testo-grigio50']"
+                class="alyo-posizione-assoluto alyo-bordo-0px alyo-larghezza-40px alyo-altezza-40px alyo-bordo-rotondo-50 alyo-bianco-trasparente-0  "><fa-icon class="alyo-testo-20px " [icon]="ordine == 'CRE' ? alyo.fa.ordine.valore:alyo.fa.ordinedecrescente.valore"></fa-icon>
+            </button>
+
+            <!--BOTTONE AGGIUNGI CLASSI-->
+            <button (click)="alyo.inserimento({funzione: 'alyoclassi', tabella: 'alyoclassi',tabellacollegamento: 'alyocollegamentigruppiclassi',tipo: 'CLS',id_padre: elemento.id,padre: elemento,attributo: attributo})" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'"
+                class="alyo-testo-grigio50 alyo-trasparente-bianco-0  alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-larghezza-100px alyo-altezza-40px  alyo-bordo-0px" style="top: 10px; right: 10px;"><fa-icon class="alyo-testo-20px " [icon]="alyo.fa.piu.valore"></fa-icon>
+                Classe
+            </button>
+
+            <!--BOTTONE CANCELLA GRUPPO CLASSI-->
+            <button *ngIf="alyo.elimina" (click)="alyo.funzione_elimina({funzione: 'alyogruppiclassi', tabella: 'alyogruppiclassi',tabellacollegamento: 'alyocollegamentigruppiclassi',id: elemento.id,id_componente: elemento.componente.id,padre: padre,attributo: attributo})"
+                style="top: -10px; right: -10px; width: 30px; height: 30px;" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-posizione-assoluto alyo-trasparente-rosso-70 alyo-sfocato-20px alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-bianco"><fa-icon class="alyo-testo-18px " [icon]="alyo.fa.meno.valore"></fa-icon>
+            </button>
+
+        </div>
+
+        <div class="alyo-larghezza-400px alyo-padding-sinistro-10px">
+            <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyogruppiclassi',id: elemento.componente.id,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-400px alyo-testo-15px'+' alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'+' alyo-testo-'+this.alyo.colore('nerobianco')], bottone_cancella: 'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50 alyo-bordo-rotondo-50'}"
+                [placeholder]="'Valore'" [alyo]="alyo"></alyoinput>
+        </div>
+
+        <div class="row alyo-margine-0px alyo-padding-5px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="elemento2.tipo == 'CLS' ? 'col-3':''" class="alyo-margine-0px  alyo-padding-5px">
+                <alyogruppoclasse [alyo]="alyo" [elemento]="elemento2" [padre]="elemento" [attributo]="attributo"></alyogruppoclasse>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="elemento.tipo == 'CLS' ">
+
+        <div [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'" class="alyo-trasparente-bianco-30 alyo-bordo-rotondo-20px alyo-altezza-100 alyo-padding-10px">
+
+            <!--BOTTONE CANCELLA CLASSI-->
+            <div class="alyo-posizione-relativo">
+                <button *ngIf="alyo.elimina" (click)="alyo.funzione_elimina({funzione: 'alyogruppiclassi', tabella: 'alyoclassi',tabellacollegamento: 'alyocollegamentigruppiclassi',id: elemento.id,id_componente: elemento.componente.id,padre: padre,attributo: attributo})"
+                    style="top: -20px; right: -20px; width: 30px; height: 30px;" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-piano-100 alyo-posizione-assoluto alyo-trasparente-rosso-70 alyo-sfocato-20px alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-bianco"><fa-icon class="alyo-testo-18px " [icon]="alyo.fa.meno.valore"></fa-icon>
+                </button>
+            </div>
+
+            <div class="alyo-padding-sotto-10px">
+                <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyoclassi',id: elemento.componente.id,attributo: 'nome'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-400px alyo-testo-15px'+' alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'+' alyo-testo-'+this.alyo.colore('nerobianco')], bottone_cancella: 'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50 alyo-bordo-rotondo-50'}"
+                    [placeholder]="'Nome Classe'" [alyo]="alyo" class="alyo-padding-sotto-10px"></alyoinput>
+            </div>
+
+            <div>
+                <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyoclassi',id: elemento.componente.id,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-400px alyo-testo-15px'+' alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'+' alyo-testo-'+this.alyo.colore('nerobianco')], bottone_cancella: 'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50 alyo-bordo-rotondo-50'}"
+                    [placeholder]="'Valore'" [alyo]="alyo"></alyoinput>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="alyo.sezione == 'NEGOZIO'">
+
+    <!--GCLS -> GRUPPO-->
+    <div *ngIf="elemento.tipo != 'CLS'" class="alyo-bordo-grigio50-1px alyo-bordo-rotondo-20px">
+
+        <div class="alyo-posizione-relativo alyo-altezza-60px">
+            <!--BOTTONE AGGIUNGI-->
+            <button (click)="alyo.inserimento({funzione: 'alyogruppiclassi', tabella: 'alyogruppiclassinegozio',tabellacollegamento: 'alyocollegamentigruppiclassinegozio',tipo: 'GCLS',id_padre: elemento.id,padre: elemento,attributo: attributo})" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'"
+                class="alyo-testo-grigio50 alyo-trasparente-bianco-0  alyo-bordo-rotondo-50 alyo-posizione-assoluto alyo-larghezza-40px alyo-altezza-40px  alyo-bordo-0px" style="top: 10px; left: 10px;"><fa-icon class="alyo-testo-20px " [icon]="alyo.fa.piu.valore"></fa-icon>
+            </button>
+
+            <!--BOTTONE ORDINA-->
+            <button (click)="ordine = ordine == 'CRE' ? 'DCR':'CRE'; elemento.lista.reverse();" style="top: 10px; left: 50px" class="alyo-posizione-assoluto alyo-bordo-0px alyo-larghezza-40px alyo-altezza-40px alyo-bordo-rotondo-50 alyo-bianco-trasparente-0  " [ngClass]="[ordine == 'DCR' ? 'alyo-testo-'+this.alyo.colore('MC'):'alyo-testo-grigio50','alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30']"><fa-icon class="alyo-testo-20px " [icon]="ordine == 'CRE' ? alyo.fa.ordine.valore:alyo.fa.ordinedecrescente.valore"></fa-icon>
+            </button>
+
+            <!--BOTTONE SELEZIONE TIPI CLASSI-->
+            <button (click)="pannello_tipi = !pannello_tipi;" style="top: 10px; left: 100px" [ngClass]="['alyo-testo-'+this.alyo.colore('nerobianco'),'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30']" class="alyo-testo-20px alyo-posizione-assoluto alyo-bordo-0px alyo-trasparente-bianco-0  alyo-padding-5px alyo-bordo-rotondo-10px">
+                {{ alyo.ritorna_ele(alyo.tipi_classi,'tipo',elemento.tipo,[]).nome}}
+            </button>
+
+            <div *ngIf="pannello_tipi" style="top: 55px; left: 100px" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'" class="row alyo-posizione-assoluto alyo-margine-0px alyo-piano-10 alyo-sfocato-30px alyo-bordo-rotondo-20px alyo-ombra-20 alyo-larghezza-200px alyo-padding-destro-10px alyo-padding-sinistro-10px alyo-padding-sopra-10px">
+                <button *ngFor="let elemento2 of alyo.tipi_classi" (click)="alyo.modifica({funzione: 'alyocollegamentigruppiclassinegozio',tabella: 'alyocollegamentigruppiclassinegozio',attributo: 'tipo',valore: elemento2.tipo,elemento: elemento });" [ngClass]="[elemento2.tipo == elemento.tipo ? 'alyo-bordo-'+this.alyo.colore('MC')+'-1px':'','alyo-testo-'+this.alyo.colore('nerobianco')]"
+                    class="alyo-margine-sotto-10px alyo-larghezza-100 alyo-trasparente-bianco-0   alyo-bordo-0px alyo-bordo-rotondo-10px alyo-padding-10px alyo-margine-0px">
+                    {{elemento2.nome}}
+                </button>
+            </div>
+
+            <!--BOTTONE AGGIUNGI CLASSI-->
+            <button (click)="alyo.sezione = 'NEGOZIO-GRUPPI-CLASSI'; this.alyo.caricamento_classi('GRUPPI-CLASSI'); alyo.elemento_selezionato = elemento;" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-testo-grigio50 alyo-trasparente-bianco-0  alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-larghezza-100px alyo-altezza-40px  alyo-bordo-0px"
+                style="top: 10px; right: 10px;"><fa-icon class="alyo-testo-20px " [icon]="alyo.fa.piu.valore"></fa-icon>
+                Classe
+            </button>
+
+            <!--BOTTONE CANCELLA GRUPPO CLASSI-->
+            <button *ngIf="alyo.elimina" (click)="alyo.funzione_elimina({funzione: 'alyogruppiclassi', tabella: 'alyogruppiclassinegozio',tabellacollegamento: 'alyocollegamentigruppiclassinegozio',id: elemento.id,padre: padre,attributo: attributo})" style="top: -10px; right: -10px; width: 30px; height: 30px;"
+                class="alyo-posizione-assoluto alyo-trasparente-rosso-70 alyo-sfocato-20px alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-bianco"><fa-icon class="alyo-testo-18px " [icon]="alyo.fa.meno.valore"></fa-icon>
+            </button>
+
+        </div>
+
+        <div class="alyo-larghezza-400px alyo-padding-sinistro-10px">
+            <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyogruppiclassinegozio',id: elemento.componente.id,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-400px alyo-testo-15px'+' alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'+' alyo-testo-'+this.alyo.colore('nerobianco')], bottone_cancella: 'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50 alyo-bordo-rotondo-50'}"
+                [placeholder]="'Valore'" [alyo]="alyo"></alyoinput>
+        </div>
+
+        <div class="row alyo-margine-0px alyo-padding-5px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="elemento2.tipo == 'CLS' ? 'col-3':''" class="alyo-margine-0px  alyo-padding-5px">
+                <alyogruppoclasse [alyo]="alyo" [elemento]="elemento2" [padre]="elemento" [attributo]="attributo"></alyogruppoclasse>
+            </div>
+        </div>
+
+    </div>
+
+    <!--CLS -> CLASSE-->
+    <div *ngIf="elemento.tipo == 'CLS' ">
+        <div [ngClass]="'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-'+alyo.colore('nerobianco')" class=" alyo-bordo-rotondo-10px alyo-altezza-100 alyo-padding-10px">
+
+            <!--BOTTONE CANCELLA CLASSI-->
+            <div class="alyo-posizione-relativo">
+                <button *ngIf="alyo.elimina" (click)="alyo.funzione_elimina({funzione: 'alyoclassi', tabella: 'alyoclassi',tabellacollegamento: 'alyocollegamentigruppiclassinegozio',id: elemento.id,padre: padre,attributo: attributo})" style="top: -20px; right: -20px; width: 30px; height: 30px;"
+                    [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-piano-100 alyo-posizione-assoluto alyo-trasparente-rosso-70 alyo-sfocato-20px alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-bianco"><fa-icon class="alyo-testo-18px " [icon]="alyo.fa.meno.valore"></fa-icon>
+                </button>
+            </div>
+
+            <!--BOTTONE SELEZIONE TIPI CLASSI-->
+
+            <!-- {{ elemento.tipo}} -->
+            <!-- <button (click)="pannello_tipi = !pannello_tipi;" style="top: 10px; left: 100px" [ngClass]="['alyo-testo-'+this.alyo.colore('nerobianco'),'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30']" class="alyo-testo-20px alyo-posizione-assoluto alyo-bordo-0px alyo-trasparente-bianco-0  alyo-padding-5px alyo-bordo-rotondo-10px">
+                {{ alyo.ritorna_ele(alyo.tipi_classi,'tipo',elemento.tipo,[]).nome}}
+            </button> -->
+
+            <!-- <div *ngIf="pannello_tipi" style="top: 55px; left: 100px" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-30'" class="row alyo-posizione-assoluto alyo-margine-0px alyo-piano-10 alyo-sfocato-30px alyo-bordo-rotondo-20px alyo-ombra-20 alyo-larghezza-200px alyo-padding-destro-10px alyo-padding-sinistro-10px alyo-padding-sopra-10px">
+                <button *ngFor="let elemento2 of alyo.tipi_classi" (click)="alyo.modifica({funzione: 'alyocollegamentigruppiclassinegozio',tabella: 'alyocollegamentigruppiclassinegozio',attributo: 'tipo',valore: elemento2.tipo,elemento: elemento });" [ngClass]="[elemento2.tipo == elemento.tipo ? 'alyo-bordo-'+this.alyo.colore('MC')+'-1px':'','alyo-testo-'+this.alyo.colore('nerobianco')]"
+                    class="alyo-margine-sotto-10px alyo-larghezza-100 alyo-trasparente-bianco-0   alyo-bordo-0px alyo-bordo-rotondo-10px alyo-padding-10px alyo-margine-0px">
+                    {{elemento2.nome}}
+                </button>
+            </div> -->
+
+            {{ elemento.componente.nome }}
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="alyo.sezione == 'NEGOZIO-GRUPPI-CLASSI'">
+
+    <!-- {{ elemento.id }} -->
+    <div *ngIf="elemento.tipo == 'GCLS'" class="alyo-bordo-grigio50-1px alyo-bordo-rotondo-20px">
+
+        <div class="alyo-posizione-relativo alyo-altezza-50px">
+
+            <!--BOTTONE ORDINA-->
+            <button (click)="ordine = ordine == 'CRE' ? 'DCR':'CRE'; elemento.lista.reverse();" style="top: 10px; left: 10px" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-posizione-assoluto alyo-bordo-0px alyo-larghezza-40px alyo-altezza-40px alyo-bordo-rotondo-50 alyo-bianco-trasparente-0  "
+                [ngClass]="ordine == 'DCR' ? 'alyo-testo-'+this.alyo.colore('MC'):'alyo-testo-grigio50'"><fa-icon class="alyo-testo-20px " [icon]="ordine == 'CRE' ? alyo.fa.ordine.valore:alyo.fa.ordinedecrescente.valore"></fa-icon>
+            </button>
+
+            <div style="top: 10px; left: 50px" class="alyo-posizione-assoluto alyo-testo-20px alyo-padding-5px">
+                {{ elemento.componente.valore }}
+            </div>
+
+        </div>
+
+        <div class="row alyo-margine-0px alyo-padding-5px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="elemento2.tipo == 'CLS' ? 'col-3':''" class="alyo-margine-0px  alyo-padding-5px">
+                <alyogruppoclasse [alyo]="alyo" [elemento]="elemento2" [padre]="elemento" [attributo]="attributo"></alyogruppoclasse>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="elemento.tipo == 'CLS' ">
+        <button [ngClass]="[alyo.ritorna_ele(alyo.elemento_selezionato.lista,'id',elemento.componente.id,['componente']) ? 'alyo-bordo-'+this.alyo.colore('MC')+'-1px':'', 'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30']" (click)="alyo.inserimento({funzione: 'alyocollegamentigruppiclassi',tabella: 'alyoclassi', tabellacollegamento: 'alyocollegamentigruppiclassinegozio',tipo: 'CLS',id_padre: alyo.elemento_selezionato.id,id_componente: elemento.componente.id,padre: alyo.elemento_selezionato,attributo: attributo})"
+            class="alyo-larghezza-100 alyo-bordo-0px alyo-trasparente-bianco-0  alyo-bordo-rotondo-10px alyo-padding-10px">
+            {{ elemento.componente.nome }}
+        </button>
+    </div>
+
+</div>
+
+<!--PANELLO ELEMNTI-->
+
+<div *ngIf="alyo.sezione == 'COMPONENTE'">
+
+    <!--GCLS, CHI, SCU, GCLN - GRUPPO-->
+    <div *ngIf="elemento.tipo != 'CLS'" [ngClass]="'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30'" class="alyo-testo-sinistro alyo-bordo-rotondo-20px alyo-padding-5px">
+
+        <div [ngClass]="'alyo-testo-'+alyo.colore('nerobianco')" class="alyo-testo-20px alyo-padding-5px">
+            {{ elemento.componente.valore }}
+        </div>
+
+        <div class="row alyo-margine-0px alyo-padding-5px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="elemento2.tipo == 'CLS' ? 'col-3':''" class="alyo-margine-0px  alyo-padding-5px">
+                <alyogruppoclasse [alyo]="alyo" [elemento]="elemento2" [padre]="elemento" [attributo]="attributo"></alyogruppoclasse>
+            </div>
+        </div>
+
+    </div>
+
+    <!--CLS -> CLASSE-->
+    <div *ngIf="elemento.tipo == 'CLS' ">
+        <div [ngClass]="['alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30']" class="alyo-testo-grigio50 alyo-bordo-rotondo-10px alyo-altezza-100 alyo-padding-10px">
+            {{ elemento.componente.nome }}
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="alyo.sezione == 'NEGOZIO-SELEZIONE'">
+
+    <!--GCLS -> GRUPPO-->
+    <div *ngIf="elemento.tipo != 'CLS'">
+
+        <div [ngClass]="'alyo-testo-'+this.alyo.colore('nerobianco')" class="alyo-padding-10px">
+            <b>{{ elemento.componente.valore }}</b>
+        </div>
+
+        <div class="row alyo-margine-0px ">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="elemento2.tipo == 'CLS' ? 'col-3':'col-sm-12 alyo-padding-10px alyo-bordo-grigio50-1px'" class="alyo-margine-0px ">
+                <alyogruppoclasse [alyo]="alyo" [elemento]="elemento2" [padre]="elemento" [attributo]="attributo"></alyogruppoclasse>
+            </div>
+        </div>
+
+    </div>
+
+    <!--CLS -> CLASSE-->
+    <div *ngIf="elemento.tipo == 'CLS' " class="alyo-testo-grigio50 alyo-padding-10px">
+        {{ elemento.componente.nome }}
+    </div>
+</div>

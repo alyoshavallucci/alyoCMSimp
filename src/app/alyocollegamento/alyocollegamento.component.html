@@ -1,0 +1,135 @@
+<!-------------------TIPI----------------------
+
+   CNT = CONTENITORE
+   ICO = ICONA
+   TXT = TESTO
+   TXA = TESTAREA
+   LNK = LINK
+   IMG = IMMAGINE
+   VID = VIDEO
+   BTN = BOTTONE
+
+-->
+
+
+<div class="alyo-posizione-relativo" [ngClass]="[padre.verticale ? 'alyo-dropbox':'',elemento.tipo == 'CNT' || elemento.tipo == 'BTN' || elemento.tipo == 'LNK' ? alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento):'',alyo.impostazioni_esistenti(elemento)]">
+
+    <!-- ID: {{ elemento.id }} <br> -->
+    <!-- ID_COMPONENTE: {{ elemento.componente.id }} <br> -->
+    <!-- POSIZIONE: {{ elemento.posizione }} <br> -->
+    <!-- ID_PADRE: {{ elemento.id_padre }} <br> -->
+
+    <!-- <div class="alyo-testo-bianco">{{ alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento) }}</div> -->
+
+    <div class="alyo-posizione-relativo alyo-altezza-50px alyo-larghezza-100">
+        <!-- <button style="top: 10px; left: 0px;" class="alyo-posizione-assoluto alyo-altezza-30px" (click)="alyo.selezionato = !alyo.selezionato">{{alyo.selezionato ? 'Selezionato':'Non Selezionato'}}</button> -->
+
+        <button *ngIf="!alyo.cestino" (click)="alyo.elemento_selezionato = elemento; alyo.sezione_selezionata = 'CSS'; alyo.apri_chiudi_pannello('COMPONENTE','COMPONENTE',true);" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-testo-grigio50 alyo-trasparente-bianco-0  alyo-bordo-rotondo-10px alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px"
+            style="top: 0px; right: 0px; z-index: 4"><fa-icon class="alyo-testo-20px" [icon]="ritorna_icona()">                  </fa-icon></button>
+
+        <!--BOTTONE CANCELLA GRUPPO CLASSI-->
+        <button *ngIf="alyo.cestino" (click)="alyo.funzione_elimina({funzione: 'alyocollegamenti', tabella: 'alyocollegamenti',id: elemento.id,padre: padre})" style="top: -15px; right: -15px; width: 30px; height: 30px;" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'"
+            class="alyo-posizione-assoluto alyo-trasparente-rosso-70 alyo-sfocato-20px alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-bianco"><fa-icon class="alyo-testo-18px " [icon]="alyo.fa.meno.valore"></fa-icon>
+        </button>
+    </div>
+
+    <!-- CLASSI ELEMENTO: {{ alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento) }} -->
+
+    <!-- CNT - GRIGLIA -->
+    <div *ngIf="elemento.tipo == 'CNT'">
+
+        <div *ngIf="!elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)]" class="alyo-bordo-8F8F8F-1px-hover">
+                <alyocollegamento [elemento]="elemento2" [alyo]="alyo" [padre]="elemento"></alyocollegamento>
+            </div>
+        </div>
+
+        <div *ngIf="elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px example-list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let elemento2 of elemento.lista">
+                <div [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)]" [ngStyle]="{width: elemento.verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                    <alyocollegamento [elemento]="elemento2" [alyo]="alyo" class="alyo-altezza-100px alyo-larghezza-100" [padre]="elemento"></alyocollegamento>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+
+    <!-- ICO - ICONA -->
+    <div *ngIf="elemento.tipo == 'ICO'">
+        <!-- {{ alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento) }} -->
+        <button (click)="alyo.elemento_selezionato = elemento;alyo.pannello = !alyo.pannello; alyo.sezione_selezionata = 'ICO'" [ngClass]="'alyo-trasparente-'+this.alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-altezza-minima-10px alyo-testo-centro alyo-bordo-0px alyo-larghezza-100 alyo-trasparente-bianco-0">
+            <fa-icon [icon]="alyo.fa[elemento.componente.valore].valore" [ngClass]="alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)"></fa-icon>
+        </button>
+    </div>
+
+    <!-- TXT - TESTO -->
+    <div *ngIf="elemento.tipo == 'TXT'">
+        <!-- {{ alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento) }} -->
+        <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyotesti',id: elemento.id_componente,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento),bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}"
+            [alyostile]="{}" [placeholder]="'Testo'" [alyo]="alyo"></alyoinput>
+    </div>
+
+    <!-- TXA - TESTO AREA-->
+    <div *ngIf="elemento.tipo == 'TXA'">
+        <alyoinput [testo]="elemento.componente" [tipo]="'textarea'" [modifica]="{tabella: 'alyotestiarea',id: elemento.id_componente,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento),bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}"
+            [alyostile]="{}" [placeholder]="'Testo'" [alyo]="alyo"></alyoinput>
+    </div>
+
+    <!-- LNK - LINK -->
+    <div *ngIf="elemento.tipo == 'LNK'">
+
+        <div *ngIf="!elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)]" class="alyo-bordo-8F8F8F-1px-hover">
+                <alyocollegamento [elemento]="elemento2" [alyo]="alyo" [padre]="elemento"></alyocollegamento>
+            </div>
+        </div>
+
+        <div *ngIf="elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px example-list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let elemento2 of elemento.lista">
+                <div [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN','componente'),elemento)]" [ngStyle]="{width: elemento.verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                    <alyocollegamento [elemento]="elemento2" [alyo]="alyo" class="alyo-altezza-100px alyo-larghezza-100" [padre]="elemento"></alyocollegamento>
+                </div>
+            </ng-container>
+        </div>
+
+        <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyolink',id: elemento.id_componente,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100 alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50'], bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}"
+            [placeholder]="'Testo'" [alyo]="alyo"></alyoinput>
+    </div>
+
+    <!-- IMG - IMMAGINE -->
+    <div *ngIf="elemento.tipo == 'IMG'">
+        <img [src]="elemento.componente.tipo == 'CRM' ?alyo.percorso_alyowool+elemento.componente.valore:elemento.componente.valore" [ngClass]="[alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)]" class="alyo-altezza-minima-100px alyo-zoom-interno">
+    </div>
+
+    <!-- BTN - BOTTONE -->
+    <div *ngIf="elemento.tipo == 'BTN'">
+        <div *ngIf="!elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px">
+            <div *ngFor="let elemento2 of elemento.lista" [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)]" class="alyo-bordo-8F8F8F-1px-hover">
+                <alyocollegamento [elemento]="elemento2" [alyo]="alyo" [padre]="elemento"></alyocollegamento>
+            </div>
+        </div>
+
+        <div *ngIf="elemento.verticale" class="row alyo-altezza-minima-100px alyo-larghezza-100 alyo-margine-0px example-list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let elemento2 of elemento.lista">
+                <div [ngClass]="[alyo.ritornoclassi(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)]" [ngStyle]="{width: elemento.verticale ? '100%':''}" class="alyo-bordo-8F8F8F-1px-hover example-box" cdkDrag>
+                    <alyocollegamento [elemento]="elemento2" [alyo]="alyo" class="alyo-altezza-100px alyo-larghezza-100" [padre]="elemento"></alyocollegamento>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- MBS - MODALITA BIANCO SCURA -->
+    <div *ngIf="elemento.tipo == 'MCS'">
+        <alyocambiobiancascura [elemento]="elemento" [alyo]="alyo"></alyocambiobiancascura>
+    </div>
+
+    <!-- FRM - IFRAME - Youtube -->
+    <div *ngIf="elemento.tipo == 'FRM'">
+
+        <iframe [src]="url" [ngClass]="alyo.ritornoclassi(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)" class="alyo-padding-sotto-10px alyo-altezza-minima-100px" allowfullscreen></iframe>
+        <alyoinput [testo]="elemento.componente" [tipo]="'text'" [modifica]="{tabella: 'alyoiframe',id: elemento.id_componente,attributo: 'valore'}" [alyoclasse]="{contenitore: '',input: ['alyo-bordo-rotondo-10px alyo-padding-10px alyo-larghezza-100 alyo-trasparente-'+alyo.colore('biancogrigio60')+'-30 alyo-testo-grigio50'], bottone_cancella: 'alyo-testo-grigio50 alyo-bianco-trasparente-0'}"
+            [placeholder]="'Testo'" [alyo]="alyo" (alyoinput)="this.url = this.get_url(this.elemento.componente.valore)"></alyoinput>
+
+    </div>
+
+</div>

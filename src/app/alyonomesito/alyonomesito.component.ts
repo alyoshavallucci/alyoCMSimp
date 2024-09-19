@@ -8,17 +8,17 @@ import { AlyoService } from '../alyo.service';
 })
 export class AlyonomesitoComponent {
 
-  @Input() alyowool: any = null;
+  @Input() alyo: any = null;
   @Output() alyonomesito = new EventEmitter()
 
-  testo = "ALYO WOOL"
+  testo = "ALYO SVILUPPO"
 
   constructor(private alyoservice: AlyoService){}
 
   ngOnInit(): void {this.alyonomesito.emit(this)}
 
   intervallo(){
-    $("#alyo_nomi_sitoweb").html(this.alyowool.alyofonts.converetitestofontrandom(this.testo)); 
+    $("#alyo_nomi_sitoweb").html(this.alyo.alyofonts.converetitestofontrandom(this.testo)); 
   }
 
 }

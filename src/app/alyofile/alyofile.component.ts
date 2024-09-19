@@ -15,7 +15,7 @@ export class AlyofileComponent implements OnInit {
   @Input() sql: any;
   @Input() estensioni: any;
   @Input() classe: any;
-  @Input() alyowool: any;
+  @Input() alyo: any;
   
   @Output('esterno') esterno = new EventEmitter()
 
@@ -46,15 +46,6 @@ export class AlyofileComponent implements OnInit {
   percorso = "";
   nome = "";
 
-  prefissi: any = {
-    inserimento: 
-       "./../"
-    ,
-    visualizzazione: {
-       true: "./../",
-       false: "https://www.alyowool.com/"
-    }
-  }
 
   tipo: any = {jpg: "IMG",jpeg: "IMG",gif: "IMG",png: "IMG",mp4: "VID",mp3: "MSK",txt: "TXT",pdf:"PDF",rtf:"RTF"}
 
@@ -88,31 +79,6 @@ export class AlyofileComponent implements OnInit {
     },200);
   }
 
-  individuaestensione(testo: any){
-    //this.alyowool.s("testo: ",testo.nome != undefined ? testo.nome.toLowerCase():testo.toLowerCase())
-    testo = testo.nome != undefined ? testo.nome.toLowerCase():testo.toLowerCase();
-    // 
-    // this.alyowool.s("testo.substr(testo.lastIndexOf('.') + 1).toLowerCase(): ",testo.substr(testo.lastIndexOf(".") + 1).toLowerCase())
-    // this.alyowool.s("this.tipo(testo.substr(testo.lastIndexOf('.') + 1).toLowerCase()): ",this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()] != undefined ? this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()]:'CRT')
-    return this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()] != undefined ? this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()]:'CRT';
-  }
-
-  visualizzaimmagine(testo: any){
-     return this.prefissi.visualizzazione.false+testo.substr(this.prefissi.inserimento.length,testo.length)
-  }
-
-  ritornaultimaoccorenza(testo: any,carattere: any){
-    return testo.substr(testo.lastIndexOf(carattere) + 1).toLowerCase();
-  }
-
-  cartellaselezionata(testo: any){
-    return testo.split("/")[testo.split("/").length-2];
-  }
-
-  caricaFils(evento: any){
-    this.caricamentofile(evento.target.files)
-  }
-
   fileselezionato(item: any){
 
     var provisorio = item
@@ -120,72 +86,19 @@ export class AlyofileComponent implements OnInit {
     formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+provisorio+"' WHERE id = "+this.file.id);
     this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
       //this.s("DATI: ",dati)
-      if(dati.response){
+      if(dati.risposta){
          this.file.src.valore = provisorio;
       } 
     });
       
-      
-      // this.alyoservice.alyo_file(formdate).subscribe(dati => {
-      //   //this.s("dati: ",dati)
-      //   if(dati.response){
-
-      //     var percorso = item.valore.replace(this.prefissi.inserimento, "");
-      //     var formdate = new FormData();
-      //     //this.s("percorso/this.lista_percorsi.nome: ",percorso)
-      //     formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+(percorso+"/"+this.lista_percorsi.nome)+"' WHERE id = "+this.file.id);
-      
-      //     this.alyoservice.alyo_modifica(formdate).subscribe(dati2 => {
-      //       //this.s("DATI2: ",dati2)
-      //       if(dati2.response){
-      //         this.lista_percorsi.selezione = percorso+"/"
-      //         this.file.src = (percorso+this.lista_percorsi.nome);
-      //       } 
-      //     });
-      //   }
-      // });
-
-
-  //   this.tipoclick = 'click';
-
-  //   setTimeout(() => {
-  //     if(this.tipoclick == "click"){
-
-  //       // this.s("PERCORSO selezione: ",this.prefissi.inserimento+this.lista_percorsi.selezione+this.lista_percorsi.nome);
-  //       // this.s("PERCORSO NUOVO: ",item.valore+"/"+this.lista_percorsi.nome);
-  //       var formdate = new FormData();
-  //       formdate.append("funzione","spostarefile");
-  //       formdate.append("variabile1",this.prefissi.inserimento+this.file2.percorso+this.lista_percorsi.nome);
-  //       formdate.append("variabile2",item.valore+"/"+this.lista_percorsi.nome);
-  //       this.alyoservice.alyo_file(formdate).subscribe(dati => {
-  //         //this.s("dati: ",dati)
-  //         if(dati.response){
-
-  //           var percorso = item.valore.replace(this.prefissi.inserimento, "");
-  //           var formdate = new FormData();
-  //           //this.s("percorso/this.lista_percorsi.nome: ",percorso)
-  //           formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+(percorso+"/"+this.lista_percorsi.nome)+"' WHERE id = "+this.file.id);
-        
-  //           this.alyoservice.alyo_modifica(formdate).subscribe(dati2 => {
-  //             //this.s("DATI2: ",dati2)
-  //             if(dati2.response){
-  //               this.lista_percorsi.selezione = percorso+"/"
-  //               this.file.src = (percorso+this.lista_percorsi.nome);
-  //             } 
-  //           });
-  //         }
-  //       });
-
-  //     }
-  //   },500)
   }
 
   avanti(posizione: any,elemento: any){
 
     this.lista_posizioni.push(posizione)
     this.lista_cartelle = elemento;
-    // this.s("this.lista_cartelle_iniziali: ",this.lista_cartelle_iniziali)
-    // this.s("elemento: ",elemento)
+    //this.s("this.lista_cartelle_iniziali: ",this.lista_cartelle_iniziali)
+    //this.s("elemento: ",elemento)
   }
 
   indietro(){
@@ -209,8 +122,9 @@ export class AlyofileComponent implements OnInit {
     //this.s("Percorso: ",percorso)
     //this.s("this.estensioni.join(','): ",this.estensioni.join(","))
     var formdate = new FormData();
+    //this.alyo.s("this.prefissi.inserimento: ",this.prefissi.inserimento)
     formdate.append("funzione","caricalistafilecartellealbero");
-    formdate.append("percorsi",this.prefissi.inserimento+"assets/,"+this.prefissi.inserimento+"alyocurriculum/");
+    formdate.append("percorsi",this.alyo.percorso_php+"assets/,"+this.alyo.percorso_php+this.alyo.percorso_cartella);
     formdate.append("estensioni",this.estensioni.join(","));
 
     this.alyoservice.alyo_file(formdate).subscribe(dati => {
@@ -237,7 +151,6 @@ export class AlyofileComponent implements OnInit {
 
   caricamentosulserver(file: any) {
 		
-
       var lista = this.lista_cartelle_iniziali;
       var percorso     = "";
       for(var pos of this.lista_posizioni){
@@ -245,7 +158,7 @@ export class AlyofileComponent implements OnInit {
         lista = lista[pos].lista;
       }
 
-      this.alyowool.s("nome: ",percorso)
+      //this.alyo.s("nome: ",percorso)
 
 			let formdate = new FormData();
       formdate.append('funzione', "inserimento");
@@ -254,17 +167,18 @@ export class AlyofileComponent implements OnInit {
       formdate.append('nuovofile',file.name);
 
       this.alyoservice.alyo_file(formdate).subscribe(dati => {  
-        //this.s("DATI: ",dati.messaggio)
-       if(dati.response){ 
+        this.s("DATI: ",dati)
+       if(dati.risposta){ 
 
           var formdate = new FormData();
           formdate.append("sql","UPDATE "+this.sql.tabella+" SET "+this.sql.attributo+" = '"+percorso+file.name+"' WHERE id = "+this.file.id);
       
           this.alyoservice.alyo_modifica(formdate).subscribe(dati2 => {
-            //this.s("DATI: ",dati2.messaggio)
-            if(dati2.response){  
+            this.s("DATI: ",dati2)
+            if(dati2.risposta){  
               this.file.src.valore = percorso+file.name;
               lista.push(percorso+file.name);
+              //this.lista_cartelle  = lista
             } 
           });
        }        
@@ -275,6 +189,38 @@ export class AlyofileComponent implements OnInit {
 
   cancellafile(id: number){
     this.filelist = this.filelist.filter(function(value, index, arr){  return index != id; });
+  }
+
+  individuaestensione(testo: any){
+    // this.alyo.s("testo: ",testo.nome != undefined ? testo.nome.toLowerCase():testo.toLowerCase())
+    testo = testo.nome != undefined ? testo.nome.toLowerCase():testo.toLowerCase();
+   
+    // this.alyo.s("testo.substr(testo.lastIndexOf('.') + 1).toLowerCase(): ",testo.substr(testo.lastIndexOf(".") + 1).toLowerCase())
+    // this.alyo.s("this.tipo(testo.substr(testo.lastIndexOf('.') + 1).toLowerCase()): ",this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()] != undefined ? this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()]:'CRT')
+    return this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()] != undefined ? this.tipo[testo.substr(testo.lastIndexOf(".") + 1).toLowerCase()]:'CRT';
+  }
+
+  visualizzaimmagine(testo: any){
+
+    //this.alyo.s("testo: ",testo)
+    testo = testo.split("/");
+    testo = testo.filter((ele: any) => {return  ele != ".."})
+    testo = testo.filter((ele: any) => {return  ele != "."})
+    //this.alyo.s("testo: ",testo.join("/"))
+
+    return  testo.join("/");
+  }
+
+  ritornaultimaoccorenza(testo: any,carattere: any){
+    return testo.substr(testo.lastIndexOf(carattere) + 1).toLowerCase();
+  }
+
+  cartellaselezionata(testo: any){
+    return testo.split("/")[testo.split("/").length-2];
+  }
+
+  caricaFils(evento: any){
+    this.caricamentofile(evento.target.files)
   }
 
   s(testo: any, contesto: any ){

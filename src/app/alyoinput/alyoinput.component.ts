@@ -21,11 +21,10 @@ export class AlyoInputComponent implements OnInit {
   @Input() tipo: any = "text";
   @Input() alyoclasse: any = null;
   @Input() alyostile: any = null;
-  @Input() alyowool: any = null
+  @Input() alyo: any = null
   @Input() testo: any = null;
   @Input() placeholder: any;
-  @Input() bordo: any = "none";
-  @Input() bottone_cancella: boolean = true;
+  @Input() bottone_cancella: boolean = false;
 
   @Input() modifica: any = null; //[tabella,id,attributo]
   @Input() chiavecookie: any = null; //{chiave: '',valore: ''}
@@ -41,6 +40,8 @@ export class AlyoInputComponent implements OnInit {
   lista_validazione: any = [{}];
   panello_validazione: boolean = false;
   alyoFonts: any = null;
+  bordo: string = "";
+  attributo: string = "";
 
   faCircleXmark = faCircleXmark;
   faEyeSlash = faEyeSlash;
@@ -50,6 +51,8 @@ export class AlyoInputComponent implements OnInit {
   constructor(private alyoservice: AlyoService,private cookie: CookieService) { }
 
   ngOnInit(): void {
+    this.modifica[2] != 'valore'  ?  this.attributo = 'valore':'';
+
     this.tipo_input = this.tipo;
     this.alyoinput.emit(this);
   }
@@ -60,13 +63,13 @@ export class AlyoInputComponent implements OnInit {
       this.modifica_server()
     }
 
-    if(this.chiavecookie != null){
-      this.scrivicookies()
-    }
+    // if(this.chiavecookie != null){
+    //   this.scrivicookies()
+    // }
 
-    if(this.chiave != null){
-      this.inserimento()
-    }
+    // if(this.chiave != null){
+    //   this.inserimento()
+    // }
 
     this.alyoinput.emit(this);
    }
@@ -74,13 +77,19 @@ export class AlyoInputComponent implements OnInit {
   modifica_server(){
 
     var formdate = new FormData();
-    formdate.append("sql","UPDATE "+this.modifica[0]+" SET "+this.modifica[2]+" = '"+this.testo.valore+"' WHERE id = "+this.modifica[1]);
-
-    this.alyoservice.alyo_modifica(formdate).subscribe(dati_c => {
-      // this.s("DATI: { ",dati_c.messaggio+" } { "+dati_c.response+" }")
-      if(dati_c.response){   
+    formdate.append("sql","UPDATE "+this.modifica.tabella+" SET "+this.modifica.attributo+" = '"+this.testo[this.modifica.attributo]+"' WHERE id = "+this.modifica.id);
+    
+    this.bordo = 'alyo-bordo-solido-giallo-1px'
+    this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
+      
+      this.alyo.s("dati: ",dati);
+      
+      if(dati.risposta){   
+        this.bordo = 'alyo-bordo-solido-verde-1px'
         this.testo.valore = this.testo.valore;
-      } 
+        setTimeout(() => {this.bordo = ''},1000);
+
+      }else{this.bordo = 'alyo-bordo-solido-rosso-1px'}
       
     });
     

@@ -1,37 +1,25 @@
+<div id="{{ 'dropbox-'+file.id }}" [ngClass]="classe.dropbox" class="alyo-altezza-minima-400px" style="padding: 0px;">
 
-
-  <div id="{{ 'dropbox-'+file.id }}"  [ngClass]="classe.dropbox" class="alyo-altezza-minimo-300px" style="padding: 0px;">
- 
-    <div *ngIf="visualizza_immagine" [ngClass]="classe.contenitore" class="alyo-posizione-relativo">
-      <img   *ngIf="file.tipo == 'immagine' && file.src.valore != ''"  [src]="visualizzaimmagine(file.src.valore)" [ngClass]="classe.immaginevideo" style="z-index: 1"> 
-      <video *ngIf="file.tipo == 'video'    && file.src.valore != ''"  [src]="visualizzaimmagine(file.src.valore)" [ngClass]="classe.immaginevideo" muted></video>   
-      <button (click)="visualizza_immagine = false;" class="alyo-testo-bianco alyo-grigio40 alyo-bordo-rotondo-50 alyo-posizione-assoluto alyo-altezza-30px alyo-larghezza-30px  alyo-bordo-0px" style="top: 5px; right: 5px; z-index: 4"><fa-icon class="alyo-testo-20px " [icon]="alyowool.fa.x.valore"></fa-icon></button>
-    </div>
- 
-    <div *ngIf="!visualizza_immagine">
-      <div class="alyo-posizione-relativo alyo-altezza-30px"> 
-        <button *ngIf="this.lista_posizioni.length" (click)="indietro()" class="alyo-posizione-assoluto alyo-bordo-rotondo-10px alyo-bianco alyo-bordo-0px alyo-testo-grigio20 alyo-larghezza-30px alyo-altezza-30px alyo-bianco-trasparente-0" style="top: 0px; left: 0px;"><fa-icon class=" alyo-testo-20px alyo-testo-grigio40" [icon]="alyowool.fa.indietro.valore"></fa-icon></button>
+    <div class="alyo-posizione-relativo alyo-altezza-30px">
+        <button *ngIf="this.lista_posizioni.length" (click)="indietro()" [ngClass]="'alyo-trasparente-'+alyo.colore('biancogrigio60')+'-hover-30'" class="alyo-posizione-assoluto alyo-bordo-rotondo-50 alyo-bordo-0px alyo-testo-grigio50 alyo-larghezza-40px alyo-altezza-40px alyo-bianco-trasparente-0"
+            style="top: 0px; left: 5px;"><fa-icon class=" alyo-testo-20px alyo-testo-grigio40" [icon]="alyo.fa.indietro1.valore"></fa-icon></button>
         <h4 class="alyo-posizione-assoluto alyo-testo-centro alyo-larghezza-100 alyo-testo-grigio40 alyo-altezza-30px " style="top: 0px; left: 30px;">{{ cartellaselezionata(cartella) }}</h4>
-      </div> 
-    
-      <div class="row alyo-altezza-300px alyo-overflow-scrollo" style="padding: 5px; margin: 0px;">
-        
-        <div *ngFor="let item of lista_cartelle; index as i;" class="col-3 col-sm-3" style="padding: 5px; margin: 0px;">
-
-          <button *ngIf="individuaestensione(item) == 'CRT'" (click)="avanti(i,item.lista); cartella=item.nome;" class="alyo-bordo-rotondo-10px alyo-larghezza-100 alyo-bianco-trasparente-0 alyo-altezza-120px alyo-bordo-0px alyo-testo-nero">
-              <fa-icon class="alyo-testo-60px alyo-testo-grigio40" [icon]="alyowool.fa.cartella.valore"></fa-icon>
-              <div class="alyo-testo-centro alyo-bordo-rotondo-10px alyo-arghezza-100">{{ cartellaselezionata(item.nome) }}</div>
-          </button> 
-
-          <button *ngIf="individuaestensione(item) == 'IMG';" (click)="fileselezionato(item); visualizza_immagine = true;" [ngClass]="file.src.valore == item ? 'alyo-bordo-solido-blu-1px':''" class="alyo-padding-0px alyo-margine-0px alyo-bordo-rotondo-10px alyo-larghezza-100 alyo-altezza-120px alyo-bordo-0px">
-              <img [src]="visualizzaimmagine(item)" class="alyo-bordo-rotondo-10px alyo-zoom-interno alyo-larghezza-100 alyo-margine-0px alyo-altezza-120px"> 
-          </button>
-              
-        </div> 
-      </div>
     </div>
 
-  </div>
+    <div class="row alyo-padding-5px alyo-margine-0px">
+
+        <div *ngFor="let item of lista_cartelle; index as i;" [ngClass]="individuaestensione(item) == 'CRT' ? 'col-2 col-sm-2':'col-3 col-sm-3'" style="padding: 5px; margin: 0px;">
+
+            <button *ngIf="individuaestensione(item) == 'CRT'" (click)="avanti(i,item.lista); cartella=item.nome;" class="alyo-bordo-rotondo-10px alyo-larghezza-100 alyo-bianco-trasparente-0 alyo-altezza-120px alyo-bordo-0px alyo-testo-nero">
+                <fa-icon class="alyo-testo-60px " [ngClass]="'alyo-testo-'+alyo.colore('grigio40grigio60')" [icon]="alyo.fa.cartella.valore"></fa-icon>
+                <div class="alyo-testo-grigio50 alyo-testo-centro alyo-bordo-rotondo-10px alyo-arghezza-100">{{ cartellaselezionata(item.nome) }}</div>
+            </button>
+            <button *ngIf="individuaestensione(item) == 'IMG';" (click)="fileselezionato(visualizzaimmagine(item));" [ngClass]="file.src.valore == visualizzaimmagine(item) ? 'alyo-bordo-'+alyo.colore('MC')+'-1px':''" class="alyo-padding-0px alyo-margine-0px alyo-bordo-rotondo-10px alyo-larghezza-100 alyo-altezza-120px alyo-bordo-0px">
+                <img [src]="alyo.percorso_alyowool+visualizzaimmagine(item)" class="alyo-bordo-rotondo-10px alyo-zoom-interno alyo-larghezza-100 alyo-margine-0px alyo-altezza-120px">  
+            </button>
+
+        </div>
+    </div>
 
 
-    
+</div>

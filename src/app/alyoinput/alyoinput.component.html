@@ -1,11 +1,8 @@
-
-  <div [ngClass]="alyoclasse.contenitore" class="alyo-posizione-relativo">
-    <input    *ngIf="tipo == 'text'"     [(ngModel)]="testo.valore" (keyup)="alyokeyupfunzione()" [ngClass]="alyoclasse.input" [ngStyle]="alyostile" [ngStyle]="{ 'border': cornice ? '1px solid #ff0000' : bordo }" [placeholder]="placeholder" class="alyo-larghezza-100 alyo-bordo-0px">
-    <textarea *ngIf="tipo == 'textarea'" [(ngModel)]="testo.valore" (keyup)="alyokeyupfunzione()" [ngClass]="alyoclasse.input" [ngStyle]="alyostile" [ngStyle]="{ 'border': cornice ? '1px solid #ff0000' : bordo }" [placeholder]="placeholder" class="alyo-larghezza-100 alyo-bordo-0px alyo-altezza-minima-100px" ></textarea>
-    <button *ngIf="testo.valore && bottone_cancella"                           [ngClass]="alyoclasse.bottone_cancella"                               [ngStyle]="{ 'top': tipo == 'text' ? '50%' : '20px' }" style="right: 10px; padding: 0px; transform: translate(0, -50%);" (click)="testo.valore = ''"                             class="alyo-posizione-assoluto alyo-bordo-0px"><fa-icon [icon]="faCircleXmark"></fa-icon></button>
+<div [ngClass]="alyoclasse.contenitore" class="alyo-posizione-relativo">
+    <input *ngIf="tipo == 'text'" [(ngModel)]="testo[modifica.attributo]" (keyup)="alyokeyupfunzione()" [ngClass]="alyoclasse.input+' '+bordo" [ngStyle]="alyostile" [placeholder]="placeholder" class="alyo-larghezza-100 alyo-bordo-0px">
+    <textarea *ngIf="tipo == 'textarea'" [(ngModel)]="testo[modifica.attributo]" (keyup)="alyokeyupfunzione()" [ngClass]="alyoclasse.input+' '+bordo" [ngStyle]="alyostile" [placeholder]="placeholder" class="alyo-larghezza-100 alyo-bordo-0px alyo-altezza-minima-100px"></textarea>
+    <button *ngIf="testo[modifica.attributo].length > 0" [ngClass]="alyoclasse.bottone_cancella" [ngStyle]="{ 'top': tipo == 'text' ? '50%' : '20px' }" style="right: 5px; padding: 0px; transform: translate(0, -50%);" (click)="testo[modifica.attributo] = ''"
+        class="alyo-posizione-assoluto alyo-bordo-0px alyo-larghezza-20px alyo-altezza-20px alyo-testo-13px"><fa-icon [icon]="alyo.fa.x.valore"></fa-icon></button>
     <!-- <button *ngIf="testo.valore && tipo == 'password' && visibilita == false"  [ngClass]="alyoclasse.bottone_no_visibile"                            [ngStyle]="{ 'top': tipo == 'text' ? '50%' : '20px' }" style="right: 30px; padding: 0px; transform: translate(0, -50%);" (click)="visibilita = true; tipo_input = 'text'; "      class="alyo-posizione-assoluto alyo-bordo-0px"><fa-icon [icon]="faEyeSlash">   </fa-icon></button>
     <button *ngIf="testo.valore && tipo == 'password' && visibilita == true"   [ngClass]="alyoclasse.bottone_visibile"                               [ngStyle]="{ 'top': tipo == 'text' ? '50%' : '20px' }" style="right: 30px; padding: 0px; transform: translate(0, -50%);" (click)="visibilita = false; tipo_input = 'password'; " class="alyo-posizione-assoluto alyo-bordo-0px"><fa-icon [icon]="faEye">        </fa-icon></button> -->
-  </div>
-
-
-
+</div>

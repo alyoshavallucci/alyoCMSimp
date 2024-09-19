@@ -1,0 +1,11 @@
+<div class="alyo-padding-10px alyo-testo-centro alyo-testo-grigio50">Modalita di visualizzazione</div>
+<div class="row alyo-testo-grigio50 alyo-margine-0px">
+    <button (click)="alyo.alyocolore.modalitachiara = !alyo.alyocolore.modalitachiara; alyo.alyocolore.modalita_selezionata = true; this.alyo.lista_funzioni();" [ngClass]="alyo.alyocolore.modalitachiara ? 'alyo-bordo-'+this.alyo.colore('MC')+'-1px alyo-testo-'+this.alyo.colore('MC'):''"
+        class="col-6 alyo-margine-0px alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-larghezza-100 alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+        Chiara
+    </button>
+    <button (click)="alyo.alyocolore.modalitachiara = !alyo.alyocolore.modalitachiara; alyo.alyocolore.modalita_selezionata = true; this.alyo.lista_funzioni();" [ngClass]="alyo.alyocolore.modalitachiara ? '':'alyo-bordo-'+this.alyo.colore('MC')+'-1px alyo-testo-'+this.alyo.colore('MC')"
+        class="col-6 alyo-margine-0px alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-larghezza-100 alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+        Scura
+    </button>
+</div>

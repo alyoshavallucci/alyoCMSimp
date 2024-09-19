@@ -9,7 +9,7 @@ import { AlyoService } from '../alyo.service';
 })
 export class AlyocontenutiscorrevoliComponent {
 
-  @Input()  alyowool:        any = null;
+  @Input()  alyo:        any = null;
   @Input()  alyocolore:      any = null;
   @Input()  classe:          any = null;
   @Input()  elemento:        any = null;
@@ -19,7 +19,7 @@ export class AlyocontenutiscorrevoliComponent {
   @Input()  pannello_classi: any = null;
   @Input()  selezionato:     any = null;
 
-  @Output() alyocontenitore = new EventEmitter()
+  @Output() alyocollegamento = new EventEmitter()
   @Output() eventopiano     = new EventEmitter()
   @Output() alyocontenutiscorrevoli: any = new EventEmitter();
 
@@ -30,8 +30,8 @@ export class AlyocontenutiscorrevoliComponent {
   padding = 10
 
   hover = false;
-  alyo = "alyo-"
-  alyocontenitore3: any = null;
+
+  alyocollegamento3: any = null;
 
   cancella                  = false;
   verticale                 = false;
@@ -76,7 +76,7 @@ export class AlyocontenutiscorrevoliComponent {
 
     // }, 1000); 
 
-    this.alyowool.s("ELEMENTO: ",this.elemento)
+    this.alyo.s("ELEMENTO: ",this.elemento)
 
     this.alyocontenutiscorrevoli.emit(this);
   }
@@ -90,7 +90,7 @@ export class AlyocontenutiscorrevoliComponent {
 
   aggiornapiano(evento: any){
    
-    //this.alyowool.s("EVENTO: ",evento)
+    //this.alyo.s("EVENTO: ",evento)
     if(evento){
       this.elemento.piano = 1;
       this.eventopiano.emit(1);
@@ -103,10 +103,10 @@ export class AlyocontenutiscorrevoliComponent {
 
   individuacolore(colore: any){
 
-    //this.alyowool.s("this.alyocolore: ",this.alyowool.alyocolore.variabile)
-    if(colore == "mc"){return this.alyowool.alyocolore.variabile}
-    if(this.alyowool.alyocolore.fisso[colore] != undefined){return this.alyowool.alyocolore.fisso[colore]}
-    if(this.alyowool.alyowool.colori.includes(colore)){return colore}
+    //this.alyo.s("this.alyocolore: ",this.alyo.alyocolore.variabile)
+    if(colore == "mc"){return this.alyo.alyocolore.variabile}
+    if(this.alyo.alyocolore.fisso[colore] != undefined){return this.alyo.alyocolore.fisso[colore]}
+    if(this.alyo.alyo.colori.includes(colore)){return colore}
     return "";
     
   }
@@ -114,7 +114,7 @@ export class AlyocontenutiscorrevoliComponent {
   rgb(colore: any) {
 
     colore = this.individuacolore(colore)
-    var esadecimale = this.alyowool.colori_esadecimali[colore]
+    var esadecimale = this.alyo.colori_esadecimali[colore]
     var risultato = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(esadecimale);
     return risultato ? {
       r: parseInt(risultato[1], 16),
@@ -125,8 +125,8 @@ export class AlyocontenutiscorrevoliComponent {
 
   drop(event: CdkDragDrop<{title: string; poster: string}[]>) {
     moveItemInArray(this.elemento.lista_componenti, event.previousIndex, event.currentIndex);
-    // this.alyowool.s("event.previousIndex: ",event.previousIndex)
-    // this.alyowool.s("event.currentIndex: ",event.currentIndex)
+    // this.alyo.s("event.previousIndex: ",event.previousIndex)
+    // this.alyo.s("event.currentIndex: ",event.currentIndex)
     this.aggiorna_posizioni()
   }
 
@@ -149,7 +149,7 @@ export class AlyocontenutiscorrevoliComponent {
 
     var formdate = new FormData();
     formdate.append("sql",variabile);
-    //this.alyowool.s("QUERY: ",variabile)
+    //this.alyo.s("QUERY: ",variabile)
     this.alyoservice.alyo_modifica(formdate).subscribe(dati => {
       // this.s("DATI: { ",dati.messaggio+" } { "+dati.response+" }")
       if(dati.response){   
@@ -168,7 +168,7 @@ export class AlyocontenutiscorrevoliComponent {
       this.primo_elemento = 0;
     }
 
-    this.alyowool.s("alyo-h1: ","alyo-h1")
+    this.alyo.s("alyo-h1: ","alyo-h1")
 
     // setTimeout(() => {$(".alyo-h1:eq("+this.primo_elemento+")").css({"left": "250%"}); },1000);
 

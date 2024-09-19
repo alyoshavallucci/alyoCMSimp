@@ -7,37 +7,37 @@ import { Component, Input } from '@angular/core';
 })
 export class AlyosfondoComponent {
 
-  @Input()  alyowool:        any = null;
+  @Input()  alyo:        any = null;
   @Input()  alyocolore:      any = null;
 
-  percorso = {
-    true:  "./../",
-    false: "https://www.alyowool.com/"
-  }
-  
-  scuro_chiara: any = [
-    {src: "alyocurriculum/assets/immagini/sfondo/chiaro.jpg",valore: true},
-    {src: "alyocurriculum/assets/immagini/sfondo/scuro.jpg" ,valore: false}
-  ]
 
-  sfondi: any = {
-    true:  "alyocurriculum/assets/immagini/sfondo/sfondo.gif",
-    false: "alyocurriculum/assets/immagini/sfondo/sfondofluo.gif"
-  }
+  scuro_chiara: any = []
+  sfondi: any = {}
 
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.scuro_chiara = [
+      {src: this.alyo.alyowoolcom+"assets/immagini/sfondo/chiaro.jpg",valore: true},
+      {src: this.alyo.alyowoolcom+"assets/immagini/sfondo/scuro.jpg" ,valore: false}
+    ]
+  
+    this.sfondi = {
+      true:  this.alyo.alyowoolcom+"assets/immagini/sfondo/sfondo.gif",
+      false: this.alyo.alyowoolcom+"assets/immagini/sfondo/sfondofluo.gif"
+    }
+  }
 
   aggiornamento(elemento2: any){
 
-    this.alyowool.alyocolore.modalita_selezionata = true;
+    this.alyo.alyocolore.modalita_selezionata = true;
     for(var ele of this.scuro_chiara){
       ele.valore = false;
     }
     elemento2.valore = true;
-    this.alyowool.alyocolore.modalitachiara = !this.alyowool.alyocolore.modalitachiara
-    this.alyowool.lista_funzioni()
-    //this.alyowool.s("this.alyocolore: ",this.alyowool.alyocolore.modalitachiara)
+    this.alyo.alyocolore.modalitachiara = !this.alyo.alyocolore.modalitachiara
+    this.alyo.lista_funzioni()
+    //this.alyo.s("this.alyocolore: ",this.alyo.alyocolore.modalitachiara)
 
   }
 

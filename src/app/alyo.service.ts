@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -9,9 +9,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AlyoService {
 
+  @Input() alyo: any = null;
+  
+  percorso_cartella = ""
 
-  perorso = "/api/impostazioni/php/"
-  percorsi = [this.perorso+"caricamento2.0.php",
+  //perorso = "/api/php/"
+  perorso = "/api/alyosviluppo/php/"
+  percorsi = [this.perorso+"caricamento.php",
               this.perorso+"inserimento.php",
               this.perorso+"modifica.php",
               this.perorso+"cancellazione.php",
@@ -19,6 +23,7 @@ export class AlyoService {
               this.perorso+"caricamentofile.php",
               this.perorso+"caricamentolistafile.php",
               this.perorso+"file.php",
+              this.perorso+"sql.php",
              ];
   nuero_di_anni = 5
 
@@ -35,6 +40,7 @@ export class AlyoService {
   alyo_caricamento_file(dati:  any):         Observable<any> { return this.alyo_post(this.percorsi[5],dati); }
   alyo_caricamento_lista_file(dati:  any):   Observable<any> { return this.alyo_post(this.percorsi[6],dati); }
   alyo_file(dati:  any):                     Observable<any> { return this.alyo_post(this.percorsi[7],dati); }
+  alyo_sql(dati:  any):                     Observable<any> { return this.alyo_post(this.percorsi[8],dati); }
 
   alyo_post(url: string, dati:  FormData): Observable<any> { return this.http.post(url,dati); }
 

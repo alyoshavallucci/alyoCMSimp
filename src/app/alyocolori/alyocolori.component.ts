@@ -73,14 +73,15 @@ export class AlyoColoriComponent implements OnInit {
 
   variabili: any = {
     true:  ["rosso","verde","blu","rosavivo","giallo","viola","marrone","arancione","turchese","orchidea"],
-    false: ["giallofluo","rosafluo","arancionefluo","verdefluo","azzurrofluo",]
+    false: ["giallofluo","rosafluo","arancionefluo","verdefluo","azzurrofluo"]
   }
 
   variabile: any = "rosso";
-  fisso: any =  {}
+  fisso: any =  {};
+  contatore = 0;
 
 
-  modalitachiara = true;
+  modalitachiara: boolean = true;
   modalita_selezionata = false;
   variabileselezionato = 0;
 
@@ -89,7 +90,7 @@ export class AlyoColoriComponent implements OnInit {
   ngOnInit(): void {
 
     this.modalitaChiara();
-    this.variabile = this.variabili[""+this.modalitachiara+""][0];
+    this.variabile = this.variabili[''+this.modalitachiara][0];
     this.fisso     = this.ritornafisso();
     this.alyocolore.emit(this);
     
@@ -100,6 +101,7 @@ export class AlyoColoriComponent implements OnInit {
     this.modalitaChiara();
     this.variabile = this.ritornavariabile();
     this.fisso     = this.ritornafisso();
+    this.contatore += 1;
   }
 
   ritornavariabile(){
@@ -107,7 +109,7 @@ export class AlyoColoriComponent implements OnInit {
     if(this.variabileselezionato>this.variabili[""+this.modalitachiara+""].length-1){
         this.variabileselezionato = 0;
     }
-    var colore = this.variabili[""+this.modalitachiara+""][this.variabileselezionato]
+    var colore = this.variabili[''+this.modalitachiara][this.variabileselezionato]
     this.variabileselezionato++;
     return colore;
   }
@@ -121,7 +123,6 @@ export class AlyoColoriComponent implements OnInit {
 
     return dict
   }
-
 
   modalitaChiara() {
     if(!this.modalita_selezionata) {

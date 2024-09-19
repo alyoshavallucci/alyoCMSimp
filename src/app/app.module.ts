@@ -21,12 +21,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { AlyofileComponent } from './alyofile/alyofile.component'
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { AlyocontenitoreComponent } from './alyocontenitore/alyocontenitore.component';
-import { AlyocontenitorelabelComponent } from './alyocontenitorelabel/alyocontenitorelabel.component';
+import { alyocollegamentoComponent } from './alyocollegamento/alyocollegamento.component';
+import { alyocollegamentolabelComponent } from './alyocollegamentolabel/alyocollegamentolabel.component';
 import { AlyosfondoComponent } from './alyosfondo/alyosfondo.component';
 import { AlyoiconesitoComponent } from './alyoiconesito/alyoiconesito.component';
 import { AlyonomesitoComponent } from './alyonomesito/alyonomesito.component';
 import { AlyocontenutiscorrevoliComponent } from './alyocontenutiscorrevoli/alyocontenutiscorrevoli.component';
+import { AlyocmsComponent } from './alyocms/alyocms.component';
+import { AlyogruppoclasseComponent } from './alyogruppoclasse/alyogruppoclasse.component';
+import { AlyocollegamentovisComponent } from './alyocollegamentovis/alyocollegamentovis.component';
+import { AlyocambiobiancascuraComponent } from './alyocambiobiancascura/alyocambiobiancascura.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +40,16 @@ import { AlyocontenutiscorrevoliComponent } from './alyocontenutiscorrevoli/alyo
     AlyoIconaNomeSitoComponent,
     AlyoColoriComponent,
     AlyofileComponent,
-    AlyocontenitoreComponent,
-    AlyocontenitorelabelComponent,
+    alyocollegamentoComponent,
+    alyocollegamentolabelComponent,
     AlyosfondoComponent,
     AlyoiconesitoComponent,
     AlyonomesitoComponent,
-    AlyocontenutiscorrevoliComponent
+    AlyocontenutiscorrevoliComponent,
+    AlyocmsComponent,
+    AlyogruppoclasseComponent,
+    AlyocollegamentovisComponent,
+    AlyocambiobiancascuraComponent
   ],
   imports: [
     BrowserModule,

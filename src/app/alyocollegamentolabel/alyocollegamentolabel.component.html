@@ -1,0 +1,78 @@
+<!-------------------TIPI----------------------
+
+   CNT = CONTENITORE
+   ICO = ICONA
+   TXT = TESTO
+   TXA = TESTAREA
+   LNK = LINK
+   IMG = IMMAGINE
+   VID = VIDEO
+   BTN = BOTTONE
+   
+-->
+
+<div [ngClass]="elemento.tipo == 'CNT' || elemento.tipo == 'BTN' || elemento.tipo == 'LNK' ? alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento):''">
+
+    <!-- {{ elemento.id }} -->
+    <!-- CLASSI ELEMENTO: {{ alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento) }} -->
+
+    <!-- CNT - GRIGLIA -->
+    <div *ngIf="elemento.tipo == 'CNT'" class="row alyo-margine-0px">
+        <div *ngFor="let elemento2 of elemento.lista" [ngClass]="alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)" class="alyo-margine-0px">
+            <!-- CLASSI CONTENITORE: {{ alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento) }} -->
+            <alyocollegamentolabel [elemento]="elemento2" [alyo]="alyo"></alyocollegamentolabel>
+        </div>
+    </div>
+
+    <!-- ICO - ICONA -->
+    <div *ngIf="elemento.tipo == 'ICO'">
+        <fa-icon [icon]="alyo.fa[elemento.componente.valore].valore" [ngClass]="alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)"></fa-icon>
+    </div>
+
+    <!-- TXT - TESTO -->
+    <div *ngIf="elemento.tipo == 'TXT'">
+        <div [ngClass]="alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)">{{elemento.componente.valore}}</div>
+    </div>
+
+    <!-- TXA - TESTO -->
+    <div *ngIf="elemento.tipo == 'TXA'">
+        <div [ngClass]="alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)">{{elemento.componente.valore}}</div>
+    </div>
+
+    <!-- LNK - LINK -->
+    <div *ngIf="elemento.tipo == 'LNK'">
+        <div *ngFor="let elemento2 of elemento.lista" [ngClass]="alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)" class="alyo-margine-0px">
+            <!-- CLASSI CONTENITORE: {{ alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento) }} -->
+            <alyocollegamentolabel [elemento]="elemento2" [alyo]="alyo"></alyocollegamentolabel>
+        </div>
+    </div>
+
+    <!-- IMG - IMMAGINE -->
+    <div *ngIf="elemento.tipo == 'IMG'">
+        <img [src]="elemento.componente.tipo == 'CRM' ?alyo.percorso_alyowool+elemento.componente.valore:elemento.componente.valore" [ngClass]="[alyo.ritornoclassi2(alyo.filtro_esclusione_ele(elemento.classi,'tipo','GCLN',['componente']),elemento)]" class="alyo-zoom-interno">
+    </div>
+
+    <!-- BTN - BOTTONE -->
+    <div *ngIf="elemento.tipo == 'BTN'">
+        <div *ngFor="let elemento2 of elemento.lista" [ngClass]="alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento)" class="alyo-margine-0px">
+            <!-- CLASSI CONTENITORE: {{ alyo.ritornoclassi2(alyo.filtro_ele(elemento2.classi,'tipo','GCLN',['componente']),elemento) }} -->
+            <alyocollegamentolabel [elemento]="elemento2" [alyo]="alyo"></alyocollegamentolabel>
+        </div>
+    </div>
+
+    <!-- MBS - MODALITA BIANCO SCURA -->
+    <div *ngIf="elemento.tipo == 'MCS'">
+        <div class="alyo-padding-10px alyo-testo-centro alyo-testo-grigio50">Modalita di visualizzazione</div>
+        <div class="row alyo-testo-grigio50 alyo-margine-0px">
+            <div (click)="alyo.alyocolore.modalitachiara = !alyo.alyocolore.modalitachiara; alyo.alyocolore.modalita_selezionata = true; this.alyo.lista_funzioni();" [ngClass]="alyo.alyocolore.modalitachiara ? 'alyo-bordo-'+this.alyo.colore('MC')+'-1px alyo-testo-'+this.alyo.colore('MC'):''"
+                class="col-6 alyo-margine-0px alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-larghezza-100 alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                Chiara
+            </div>
+            <div (click)="alyo.alyocolore.modalitachiara = !alyo.alyocolore.modalitachiara; alyo.alyocolore.modalita_selezionata = true; this.alyo.lista_funzioni();" [ngClass]="alyo.alyocolore.modalitachiara ? '':'alyo-bordo-'+this.alyo.colore('MC')+'-1px alyo-testo-'+this.alyo.colore('MC')"
+                class="col-6 alyo-margine-0px alyo-testo-grigio50 alyo-trasparente-bianco-0 alyo-larghezza-100 alyo-bordo-0px alyo-padding-10px alyo-bordo-rotondo-10px">
+                Scura
+            </div>
+        </div>
+    </div>
+
+</div>
