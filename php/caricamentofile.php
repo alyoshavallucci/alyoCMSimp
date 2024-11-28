@@ -25,7 +25,7 @@
     
     $data = [
          "messaggio" => "[LOG = $log]\n'",
-         "response" => true
+         "risposta" => true
     ];
     echo json_encode($data);
 
